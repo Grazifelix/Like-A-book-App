@@ -29,7 +29,8 @@ class _LoginHomePageState extends State<LoginHomePage> {
           Color.fromARGB(255, 99, 85, 207)
         ],
       )),
-      padding: const EdgeInsets.all(54.0),
+      padding: const EdgeInsets.only(
+          left: 54.0, top: 54.0, right: 54.0, bottom: 0.0),
       child: ListView(
         children: <Widget>[
           SizedBox(
