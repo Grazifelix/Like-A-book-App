@@ -44,11 +44,19 @@ class _LoginHomePageState extends State<LoginHomePage> {
             validator: (value) => validarEmail(value!),
             keyboardType: TextInputType.emailAddress,
             decoration: const InputDecoration(
+              enabledBorder: UnderlineInputBorder(
+                borderSide:
+                    BorderSide(color: Color.fromARGB(128, 255, 255, 255)),
+              ),
+              focusedBorder: UnderlineInputBorder(
+                borderSide:
+                    BorderSide(color: Color.fromARGB(128, 255, 255, 255)),
+              ),
               floatingLabelStyle:
                   TextStyle(color: Color.fromARGB(128, 255, 255, 255)),
               labelText: "Email",
               labelStyle: TextStyle(
-                  //color: Color.fromARGB(128, 255, 255, 255),
+                  color: Color.fromARGB(128, 255, 255, 255),
                   fontWeight: FontWeight.w400,
                   fontSize: 20),
             ),
@@ -60,11 +68,19 @@ class _LoginHomePageState extends State<LoginHomePage> {
             keyboardType: TextInputType.visiblePassword,
             validator: (value) => validarSenha(value!),
             decoration: const InputDecoration(
+              enabledBorder: UnderlineInputBorder(
+                borderSide:
+                    BorderSide(color: Color.fromARGB(128, 255, 255, 255)),
+              ),
+              focusedBorder: UnderlineInputBorder(
+                borderSide:
+                    BorderSide(color: Color.fromARGB(128, 255, 255, 255)),
+              ),
               floatingLabelStyle:
                   TextStyle(color: Color.fromARGB(128, 255, 255, 255)),
               labelText: "Senha",
               labelStyle: TextStyle(
-                  //color: Color.fromARGB(128, 255, 255, 255),
+                  color: Color.fromARGB(128, 255, 255, 255),
                   fontWeight: FontWeight.w400,
                   fontSize: 20),
             ),
