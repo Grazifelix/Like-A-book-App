@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:flutter/material.dart';
 import 'package:likeabook_app/src/controller/login_page_controller.dart';
 
@@ -115,7 +113,6 @@ class _LoginHomePageState extends State<LoginHomePage> {
                             Color.fromARGB(45, 127, 116, 206),
                             Color.fromARGB(100, 137, 137, 137),
                           ]),
-                      //color: Colors.black12,
                       borderRadius: BorderRadius.all(Radius.circular(30))),
                   child: const Center(
                     child: Text(
@@ -129,46 +126,17 @@ class _LoginHomePageState extends State<LoginHomePage> {
                 ),
               )),
           const SizedBox(
-            height: 18,
+            height: 8,
           ),
-          Material(
-              borderRadius: const BorderRadius.all(
-                Radius.circular(30),
+          TextButton(
+              child: const Text(
+                "Cadastrar",
+                style: TextStyle(
+                    color: Color.fromARGB(128, 255, 255, 255), fontSize: 18),
               ),
-              child: InkWell(
-                borderRadius: const BorderRadius.all(
-                  Radius.circular(30),
-                ),
-                onTap: () => print('Cadastrar'),
-                child: Ink(
-                  height: 54,
-                  width: double.maxFinite,
-                  decoration: const BoxDecoration(
-                      gradient: LinearGradient(
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
-                          stops: [
-                            0.0,
-                            0.45,
-                            0.9
-                          ],
-                          colors: [
-                            Color.fromARGB(146, 255, 255, 255),
-                            Color.fromARGB(45, 127, 116, 206),
-                            Color.fromARGB(100, 137, 137, 137),
-                          ]),
-                      borderRadius: BorderRadius.all(Radius.circular(30))),
-                  child: const Center(
-                    child: Text(
-                      'Cadastrar',
-                      style: TextStyle(
-                        color: Color.fromARGB(255, 127, 116, 206),
-                        fontSize: 20,
-                      ),
-                    ),
-                  ),
-                ),
-              ))
+              onPressed: () {
+                Navigator.pushNamed(context, '/cadastro');
+              }),
         ],
       ),
     ));
