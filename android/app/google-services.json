@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1038393609019",
+    "project_id": "likeabook-58931",
+    "storage_bucket": "likeabook-58931.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1038393609019:android:707fcb361010c6ba63051e",
+        "android_client_info": {
+          "package_name": "br.com.likeabook_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1038393609019-tf4alglsjqbfj9gvmva6rkvc5pec900h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDklWZGcIOnpU37QME7EMXgTAmj_ZW0wD0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1038393609019-tf4alglsjqbfj9gvmva6rkvc5pec900h.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -95,7 +95,7 @@ class _LoginHomePageState extends State<LoginHomePage> {
                 borderRadius: const BorderRadius.all(
                   Radius.circular(30),
                 ),
-                onTap: () => print('Login'),
+                onTap: () => sendtoFirebase(),
                 child: Ink(
                   height: 54,
                   width: double.maxFinite,
