@@ -34,7 +34,7 @@ class _RegisterPageState extends State<RegisterPage> {
             SizedBox(
               width: 128,
               height: 128,
-              child: Image.asset('imagens/logo_imagem.jpeg'),
+              child: Image.asset('assets/images/logo.png'),
             ),
             const SizedBox(
               height: 20,
