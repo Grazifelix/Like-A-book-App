@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:likeabook_app/src/view/home_page_view.dart';
 import 'package:likeabook_app/src/view/login_page_view.dart';
 import 'package:likeabook_app/src/view/register_page_view.dart';
 
@@ -15,11 +16,15 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'LikeABook',
-      theme: ThemeData(primarySwatch: Colors.deepPurple),
+      theme: ThemeData(
+        appBarTheme: const AppBarTheme(
+            backgroundColor: Color.fromARGB(255, 99, 85, 207)),
+      ),
       initialRoute: '/',
       routes: {
         LoginHomePage.routeName: (context) => const LoginHomePage(),
         RegisterPage.routeName: (context) => const RegisterPage(),
+        HomePage.routeName: (context) => const HomePage(),
       },
     );
   }
