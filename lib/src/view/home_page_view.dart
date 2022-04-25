@@ -34,10 +34,9 @@ class _HomePageState extends State<HomePage> {
         ))),
         actions: [
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
               IconButton(
-                onPressed: () => {},
+                onPressed: () => {Navigator.pushNamed(context, '/profile')},
                 icon: const Icon(Icons.person),
                 tooltip: "Profile",
               )
