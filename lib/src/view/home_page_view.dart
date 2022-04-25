@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:likeabook_app/src/controller/login_page_controller.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -14,19 +13,36 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
+        leading: IconButton(
+          onPressed: () => {},
+          icon: const Icon(Icons.search_rounded),
+          tooltip: "Searching",
+        ),
+        flexibleSpace: Container(
+            decoration: const BoxDecoration(
+                gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          stops: [0.0, 0.4, 0.6, 1.0],
+          colors: [
+            Color.fromARGB(255, 99, 85, 207),
+            Color.fromARGB(255, 117, 102, 212),
+            Color.fromARGB(255, 123, 103, 255),
+            Color.fromARGB(255, 99, 85, 207)
+          ],
+        ))),
         actions: [
-          Container(
-              //padding: const EdgeInsets.only(left: 5, right: 5),
-              child: Row(
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
               IconButton(
-                  onPressed: () => {}, icon: const Icon(Icons.search_rounded)),
-              SizedBox(
-                  width: 25,
-                  height: 25,
-                  child: Image.asset('assets/images/logo.png')),
+                onPressed: () => {},
+                icon: const Icon(Icons.person),
+                tooltip: "Profile",
+              )
             ],
-          )),
+          ),
         ],
       ),
       body: Container(),
