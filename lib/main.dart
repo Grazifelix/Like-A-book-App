@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:likeabook_app/src/view/home_page_view.dart';
 import 'package:likeabook_app/src/view/login_page_view.dart';
+import 'package:likeabook_app/src/view/profile_page_view.dart';
 import 'package:likeabook_app/src/view/register_page_view.dart';
 
 void main() {
@@ -25,6 +26,7 @@ class MyApp extends StatelessWidget {
         LoginHomePage.routeName: (context) => const LoginHomePage(),
         RegisterPage.routeName: (context) => const RegisterPage(),
         HomePage.routeName: (context) => const HomePage(),
+        ProfilePage.routeName: (context) => const ProfilePage(),
       },
     );
   }
