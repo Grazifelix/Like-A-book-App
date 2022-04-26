@@ -172,9 +172,10 @@ class _ProfilePageState extends State<ProfilePage> {
                 image: NetworkImage(item.urlImage),
                 fit: BoxFit.cover,
                 child: InkWell(
-                  hoverColor: Color.fromARGB(86, 96, 79, 126),
-                  splashColor: Color.fromARGB(86, 96, 79, 126),
-                  onTap: () => {print('Clique')},
+                  hoverColor: const Color.fromARGB(86, 96, 79, 126),
+                  splashColor: const Color.fromARGB(86, 96, 79, 126),
+                  onTap: () =>
+                      {Navigator.pushNamed(context, '/book', arguments: item)},
                 ),
               ),
             ),
