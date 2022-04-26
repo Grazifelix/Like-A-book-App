@@ -8,7 +8,37 @@ class ProfilePage extends StatefulWidget {
   State<ProfilePage> createState() => _ProfilePageState();
 }
 
+class CardProfileItem {
+  final String urlImage;
+  bool favorite;
+
+  CardProfileItem({required this.urlImage, required this.favorite});
+}
+
 class _ProfilePageState extends State<ProfilePage> {
+  List<CardProfileItem> items = [
+    CardProfileItem(
+        urlImage:
+            'https://images-na.ssl-images-amazon.com/images/I/51AblvcjrJL._SX342_SY445_QL70_ML2_.jpg',
+        favorite: true),
+    CardProfileItem(
+        urlImage:
+            'https://images-na.ssl-images-amazon.com/images/I/91Sn67XUSHL.jpg',
+        favorite: true),
+    CardProfileItem(
+        urlImage:
+            'https://images-na.ssl-images-amazon.com/images/I/51AblvcjrJL._SX342_SY445_QL70_ML2_.jpg',
+        favorite: false),
+    CardProfileItem(
+        urlImage:
+            'https://images-na.ssl-images-amazon.com/images/I/91Sn67XUSHL.jpg',
+        favorite: true),
+    CardProfileItem(
+        urlImage:
+            'https://images-na.ssl-images-amazon.com/images/I/51AblvcjrJL._SX342_SY445_QL70_ML2_.jpg',
+        favorite: true),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -67,11 +97,11 @@ class _ProfilePageState extends State<ProfilePage> {
             height: 200,
             child: ListView.separated(
               scrollDirection: Axis.horizontal,
-              itemCount: 6,
+              itemCount: items.length,
               separatorBuilder: (context, _) => const SizedBox(
                 width: 12.0,
               ),
-              itemBuilder: (context, index) => buildCards(),
+              itemBuilder: (context, index) => buildCards(item: items[index]),
             ),
           ),
 
@@ -103,11 +133,11 @@ class _ProfilePageState extends State<ProfilePage> {
             height: 200,
             child: ListView.separated(
               scrollDirection: Axis.horizontal,
-              itemCount: 6,
+              itemCount: items.length,
               separatorBuilder: (context, _) => const SizedBox(
                 width: 12.0,
               ),
-              itemBuilder: (context, index) => buildCards(),
+              itemBuilder: (context, index) => buildCards(item: items[index]),
             ),
           ),
         ],
@@ -115,17 +145,24 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
-  Widget buildCards() => Container(
+  Widget buildCards({required CardProfileItem item}) => SizedBox(
         width: 111,
-        height: 164,
-        //color: Colors.purple,
         child: Column(children: [
-          Image.network(
-              "https://images-na.ssl-images-amazon.com/images/I/51AblvcjrJL._SX342_SY445_QL70_ML2_.jpg"),
-          SizedBox(
+          Expanded(
+              child: Image.network(
+            item.urlImage,
+          )),
+          const SizedBox(
             height: 5,
           ),
-          const Icon(Icons.favorite, color: Color.fromARGB(255, 99, 85, 207)),
+          favorite(item.favorite)
         ]),
       );
+
+  Widget favorite(bool favorite) {
+    return Icon(
+      favorite ? Icons.favorite : null,
+      color: favorite ? const Color.fromARGB(255, 99, 85, 207) : null,
+    );
+  }
 }
