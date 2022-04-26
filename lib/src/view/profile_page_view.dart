@@ -10,9 +10,17 @@ class ProfilePage extends StatefulWidget {
 
 class CardProfileItem {
   final String urlImage;
+  final String title;
+  final String autor;
+  final String description;
   bool favorite;
 
-  CardProfileItem({required this.urlImage, required this.favorite});
+  CardProfileItem(
+      {required this.urlImage,
+      required this.title,
+      required this.autor,
+      required this.description,
+      required this.favorite});
 }
 
 class _ProfilePageState extends State<ProfilePage> {
@@ -20,22 +28,37 @@ class _ProfilePageState extends State<ProfilePage> {
     CardProfileItem(
         urlImage:
             'https://images-na.ssl-images-amazon.com/images/I/51AblvcjrJL._SX342_SY445_QL70_ML2_.jpg',
+        title: 'Corte de Espinho e Rosas',
+        autor: 'Sarah J. Maas',
+        description: 'Descrição',
         favorite: true),
     CardProfileItem(
         urlImage:
             'https://images-na.ssl-images-amazon.com/images/I/91Sn67XUSHL.jpg',
+        title: 'Corte de Névoa e Furia',
+        autor: 'Sarah J. Maas',
+        description: 'Descrição',
         favorite: true),
     CardProfileItem(
         urlImage:
             'https://images-na.ssl-images-amazon.com/images/I/51AblvcjrJL._SX342_SY445_QL70_ML2_.jpg',
+        title: 'Corte de Espinho e Rosas',
+        autor: 'Sarah J. Maas',
+        description: 'Descrição',
         favorite: false),
     CardProfileItem(
         urlImage:
             'https://images-na.ssl-images-amazon.com/images/I/91Sn67XUSHL.jpg',
+        title: 'Corte de Névoa e Furia',
+        autor: 'Sarah J. Maas',
+        description: 'Descrição',
         favorite: true),
     CardProfileItem(
         urlImage:
             'https://images-na.ssl-images-amazon.com/images/I/51AblvcjrJL._SX342_SY445_QL70_ML2_.jpg',
+        title: 'Corte de Espinho e Rosas',
+        autor: 'Sarah J. Maas',
+        description: 'Descrição',
         favorite: true),
   ];
 
@@ -72,7 +95,6 @@ class _ProfilePageState extends State<ProfilePage> {
         padding: const EdgeInsets.all(20.0),
         children: [
           //Books already read
-
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: const [
@@ -89,14 +111,12 @@ class _ProfilePageState extends State<ProfilePage> {
             height: 3.0,
             thickness: 1.0,
           ),
-          const SizedBox(
-            height: 15,
-          ),
           //booklist_one
           SizedBox(
             height: 200,
             child: ListView.separated(
               scrollDirection: Axis.horizontal,
+              padding: const EdgeInsets.only(top: 15.0),
               itemCount: items.length,
               separatorBuilder: (context, _) => const SizedBox(
                 width: 12.0,
@@ -125,14 +145,12 @@ class _ProfilePageState extends State<ProfilePage> {
             height: 3.0,
             thickness: 1.0,
           ),
-          const SizedBox(
-            height: 15,
-          ),
           //booklist_two
           SizedBox(
             height: 200,
             child: ListView.separated(
               scrollDirection: Axis.horizontal,
+              padding: const EdgeInsets.only(top: 15.0),
               itemCount: items.length,
               separatorBuilder: (context, _) => const SizedBox(
                 width: 12.0,
@@ -149,9 +167,18 @@ class _ProfilePageState extends State<ProfilePage> {
         width: 111,
         child: Column(children: [
           Expanded(
-              child: Image.network(
-            item.urlImage,
-          )),
+            child: Material(
+              child: Ink.image(
+                image: NetworkImage(item.urlImage),
+                fit: BoxFit.cover,
+                child: InkWell(
+                  hoverColor: Color.fromARGB(86, 96, 79, 126),
+                  splashColor: Color.fromARGB(86, 96, 79, 126),
+                  onTap: () => {print('Clique')},
+                ),
+              ),
+            ),
+          ),
           const SizedBox(
             height: 5,
           ),
