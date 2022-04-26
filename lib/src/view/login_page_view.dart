@@ -40,7 +40,7 @@ class _LoginHomePageState extends State<LoginHomePage> {
             height: 20,
           ),
           TextFormField(
-            validator: (value) => validarEmail(value!),
+            validator: (value) => validateEmail(value!),
             keyboardType: TextInputType.emailAddress,
             decoration: const InputDecoration(
               enabledBorder: UnderlineInputBorder(
@@ -65,7 +65,7 @@ class _LoginHomePageState extends State<LoginHomePage> {
           ),
           TextFormField(
             keyboardType: TextInputType.visiblePassword,
-            validator: (value) => validarSenha(value!),
+            validator: (value) => validatePassword(value!),
             decoration: const InputDecoration(
               enabledBorder: UnderlineInputBorder(
                 borderSide:

@@ -62,7 +62,7 @@ class _RegisterPageState extends State<RegisterPage> {
             ),
             //Input Email
             TextFormField(
-              validator: (value) => validarEmail(value!),
+              validator: (value) => validateEmail(value!),
               keyboardType: TextInputType.emailAddress,
               decoration: const InputDecoration(
                 enabledBorder: UnderlineInputBorder(
@@ -88,7 +88,7 @@ class _RegisterPageState extends State<RegisterPage> {
             //Input Senha
             TextFormField(
               keyboardType: TextInputType.visiblePassword,
-              validator: (value) => validarSenha(value!),
+              validator: (value) => validatePassword(value!),
               decoration: const InputDecoration(
                 enabledBorder: UnderlineInputBorder(
                   borderSide:
@@ -112,7 +112,7 @@ class _RegisterPageState extends State<RegisterPage> {
             ),
             TextFormField(
               keyboardType: TextInputType.visiblePassword,
-              validator: (value) => validarSenha(value!),
+              validator: (value) => validatePassword(value!),
               decoration: const InputDecoration(
                 enabledBorder: UnderlineInputBorder(
                   borderSide:
