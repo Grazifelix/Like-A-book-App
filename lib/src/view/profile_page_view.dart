@@ -42,6 +42,7 @@ class _ProfilePageState extends State<ProfilePage> {
         padding: const EdgeInsets.all(20.0),
         children: [
           //Books already read
+
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: const [
@@ -53,6 +54,7 @@ class _ProfilePageState extends State<ProfilePage> {
           const SizedBox(
             height: 5,
           ),
+          //divider
           const Divider(
             height: 3.0,
             thickness: 1.0,
@@ -60,8 +62,17 @@ class _ProfilePageState extends State<ProfilePage> {
           const SizedBox(
             height: 15,
           ),
-          Row(
-            children: [buildCards()],
+          //booklist_one
+          SizedBox(
+            height: 200,
+            child: ListView.separated(
+              scrollDirection: Axis.horizontal,
+              itemCount: 6,
+              separatorBuilder: (context, _) => const SizedBox(
+                width: 12.0,
+              ),
+              itemBuilder: (context, index) => buildCards(),
+            ),
           ),
 
           //Books to read
@@ -79,6 +90,7 @@ class _ProfilePageState extends State<ProfilePage> {
           const SizedBox(
             height: 5,
           ),
+          //divider2
           const Divider(
             height: 3.0,
             thickness: 1.0,
@@ -86,8 +98,17 @@ class _ProfilePageState extends State<ProfilePage> {
           const SizedBox(
             height: 15,
           ),
-          Row(
-            children: [Books()],
+          //booklist_two
+          SizedBox(
+            height: 200,
+            child: ListView.separated(
+              scrollDirection: Axis.horizontal,
+              itemCount: 6,
+              separatorBuilder: (context, _) => const SizedBox(
+                width: 12.0,
+              ),
+              itemBuilder: (context, index) => buildCards(),
+            ),
           ),
         ],
       ),
@@ -97,13 +118,14 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget buildCards() => Container(
         width: 111,
         height: 164,
-        color: Colors.purple,
-      );
-
-  Widget Books() => Container(
+        //color: Colors.purple,
         child: Column(children: [
-          buildCards(),
-          Icon(Icons.favorite, color: Color.fromARGB(255, 99, 85, 207)),
+          Image.network(
+              "https://images-na.ssl-images-amazon.com/images/I/51AblvcjrJL._SX342_SY445_QL70_ML2_.jpg"),
+          SizedBox(
+            height: 5,
+          ),
+          const Icon(Icons.favorite, color: Color.fromARGB(255, 99, 85, 207)),
         ]),
       );
 }
