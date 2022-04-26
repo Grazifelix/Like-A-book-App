@@ -31,8 +31,8 @@ class _BookPage extends State<BookPage> {
             children: <Widget>[
               IconButton(
                 onPressed: () => {},
-                icon: const Icon(Icons.exit_to_app_outlined),
-                tooltip: "Logout",
+                icon: const Icon(Icons.person),
+                tooltip: "Profile",
               )
             ],
           ),
