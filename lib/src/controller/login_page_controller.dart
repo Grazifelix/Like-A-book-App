@@ -14,7 +14,6 @@ String? validatePassword(String password) {
   if (password.length < 6 || password.length > 20) {
     return 'Tamanho de senha inválido';
   } else if (!reg.hasMatch(password)) {
-    print('senha');
     return 'A senha deve conter letras e números';
   }
   return null;

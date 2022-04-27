@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:likeabook_app/src/controller/login_page_controller.dart';
+import 'package:likeabook_app/src/controller/register_page_controller.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({Key? key}) : super(key: key);
@@ -10,6 +10,7 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
+  final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,96 +40,104 @@ class _RegisterPageState extends State<RegisterPage> {
             const SizedBox(
               height: 20,
             ),
-            //Input Name
-            TextFormField(
-              keyboardType: TextInputType.name,
-              decoration: const InputDecoration(
-                  enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(
-                          color: Color.fromARGB(128, 255, 255, 255))),
-                  focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(
-                          color: Color.fromARGB(128, 255, 255, 255))),
-                  floatingLabelStyle:
-                      TextStyle(color: Color.fromARGB(128, 255, 255, 255)),
-                  labelText: "Nome",
-                  labelStyle: TextStyle(
-                      color: Color.fromARGB(128, 255, 255, 255),
-                      fontWeight: FontWeight.w400,
-                      fontSize: 20)),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            //Input Email
-            TextFormField(
-              validator: (value) => validateEmail(value!),
-              keyboardType: TextInputType.emailAddress,
-              decoration: const InputDecoration(
-                enabledBorder: UnderlineInputBorder(
-                  borderSide:
-                      BorderSide(color: Color.fromARGB(128, 255, 255, 255)),
-                ),
-                focusedBorder: UnderlineInputBorder(
-                  borderSide:
-                      BorderSide(color: Color.fromARGB(128, 255, 255, 255)),
-                ),
-                floatingLabelStyle:
-                    TextStyle(color: Color.fromARGB(128, 255, 255, 255)),
-                labelText: "Email",
-                labelStyle: TextStyle(
-                    color: Color.fromARGB(128, 255, 255, 255),
-                    fontWeight: FontWeight.w400,
-                    fontSize: 20),
-              ),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            //Input Senha
-            TextFormField(
-              keyboardType: TextInputType.visiblePassword,
-              validator: (value) => validatePassword(value!),
-              decoration: const InputDecoration(
-                enabledBorder: UnderlineInputBorder(
-                  borderSide:
-                      BorderSide(color: Color.fromARGB(128, 255, 255, 255)),
-                ),
-                focusedBorder: UnderlineInputBorder(
-                  borderSide:
-                      BorderSide(color: Color.fromARGB(128, 255, 255, 255)),
-                ),
-                floatingLabelStyle:
-                    TextStyle(color: Color.fromARGB(128, 255, 255, 255)),
-                labelText: "Senha",
-                labelStyle: TextStyle(
-                    color: Color.fromARGB(128, 255, 255, 255),
-                    fontWeight: FontWeight.w400,
-                    fontSize: 20),
-              ),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            TextFormField(
-              keyboardType: TextInputType.visiblePassword,
-              validator: (value) => validatePassword(value!),
-              decoration: const InputDecoration(
-                enabledBorder: UnderlineInputBorder(
-                  borderSide:
-                      BorderSide(color: Color.fromARGB(128, 255, 255, 255)),
-                ),
-                focusedBorder: UnderlineInputBorder(
-                  borderSide:
-                      BorderSide(color: Color.fromARGB(128, 255, 255, 255)),
-                ),
-                floatingLabelStyle:
-                    TextStyle(color: Color.fromARGB(128, 255, 255, 255)),
-                labelText: "Confirmar Senha",
-                labelStyle: TextStyle(
-                    color: Color.fromARGB(128, 255, 255, 255),
-                    fontWeight: FontWeight.w400,
-                    fontSize: 20),
+            Form(
+              key: _formKey,
+              child: Column(
+                children: [
+                  //Input Name
+                  TextFormField(
+                    keyboardType: TextInputType.name,
+                    validator: (name) => validateName(name!),
+                    decoration: const InputDecoration(
+                        enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                                color: Color.fromARGB(128, 255, 255, 255))),
+                        focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                                color: Color.fromARGB(128, 255, 255, 255))),
+                        floatingLabelStyle: TextStyle(
+                            color: Color.fromARGB(128, 255, 255, 255)),
+                        labelText: "Nome",
+                        labelStyle: TextStyle(
+                            color: Color.fromARGB(128, 255, 255, 255),
+                            fontWeight: FontWeight.w400,
+                            fontSize: 20)),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  //Input Email
+                  TextFormField(
+                    validator: (email) => validateEmail(email!),
+                    keyboardType: TextInputType.emailAddress,
+                    decoration: const InputDecoration(
+                      enabledBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(
+                            color: Color.fromARGB(128, 255, 255, 255)),
+                      ),
+                      focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(
+                            color: Color.fromARGB(128, 255, 255, 255)),
+                      ),
+                      floatingLabelStyle:
+                          TextStyle(color: Color.fromARGB(128, 255, 255, 255)),
+                      labelText: "Email",
+                      labelStyle: TextStyle(
+                          color: Color.fromARGB(128, 255, 255, 255),
+                          fontWeight: FontWeight.w400,
+                          fontSize: 20),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  //Input Senha
+                  TextFormField(
+                    keyboardType: TextInputType.visiblePassword,
+                    validator: (password) => validatePassword(password!),
+                    decoration: const InputDecoration(
+                      enabledBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(
+                            color: Color.fromARGB(128, 255, 255, 255)),
+                      ),
+                      focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(
+                            color: Color.fromARGB(128, 255, 255, 255)),
+                      ),
+                      floatingLabelStyle:
+                          TextStyle(color: Color.fromARGB(128, 255, 255, 255)),
+                      labelText: "Senha",
+                      labelStyle: TextStyle(
+                          color: Color.fromARGB(128, 255, 255, 255),
+                          fontWeight: FontWeight.w400,
+                          fontSize: 20),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  TextFormField(
+                    keyboardType: TextInputType.visiblePassword,
+                    validator: (password2) => confirmPassword(password2!),
+                    decoration: const InputDecoration(
+                      enabledBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(
+                            color: Color.fromARGB(128, 255, 255, 255)),
+                      ),
+                      focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(
+                            color: Color.fromARGB(128, 255, 255, 255)),
+                      ),
+                      floatingLabelStyle:
+                          TextStyle(color: Color.fromARGB(128, 255, 255, 255)),
+                      labelText: "Confirmar Senha",
+                      labelStyle: TextStyle(
+                          color: Color.fromARGB(128, 255, 255, 255),
+                          fontWeight: FontWeight.w400,
+                          fontSize: 20),
+                    ),
+                  ),
+                ],
               ),
             ),
             const SizedBox(
@@ -142,7 +151,11 @@ class _RegisterPageState extends State<RegisterPage> {
                   borderRadius: const BorderRadius.all(
                     Radius.circular(30),
                   ),
-                  onTap: () => print('Cadastrar'),
+                  onTap: () {
+                    if (_formKey.currentState!.validate()) {
+                      registerInFirebase();
+                    }
+                  },
                   child: Ink(
                     height: 54,
                     width: double.maxFinite,
