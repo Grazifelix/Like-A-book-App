@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:likeabook_app/src/itemsTestClass.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -8,60 +9,9 @@ class ProfilePage extends StatefulWidget {
   State<ProfilePage> createState() => _ProfilePageState();
 }
 
-class CardProfileItem {
-  final String urlImage;
-  final String title;
-  final String autor;
-  final String description;
-  bool favorite;
-
-  CardProfileItem(
-      {required this.urlImage,
-      required this.title,
-      required this.autor,
-      required this.description,
-      required this.favorite});
-}
+RepositoryItens repository = new RepositoryItens();
 
 class _ProfilePageState extends State<ProfilePage> {
-  List<CardProfileItem> items = [
-    CardProfileItem(
-        urlImage:
-            'https://images-na.ssl-images-amazon.com/images/I/51AblvcjrJL._SX342_SY445_QL70_ML2_.jpg',
-        title: 'Corte de Espinho e Rosas',
-        autor: 'Sarah J. Maas',
-        description: 'Descrição',
-        favorite: true),
-    CardProfileItem(
-        urlImage:
-            'https://images-na.ssl-images-amazon.com/images/I/91Sn67XUSHL.jpg',
-        title: 'Corte de Névoa e Furia',
-        autor: 'Sarah J. Maas',
-        description: 'Descrição',
-        favorite: true),
-    CardProfileItem(
-        urlImage:
-            'https://images-na.ssl-images-amazon.com/images/I/51AblvcjrJL._SX342_SY445_QL70_ML2_.jpg',
-        title: 'Corte de Espinho e Rosas',
-        autor: 'Sarah J. Maas',
-        description: 'Descrição',
-        favorite: false),
-    CardProfileItem(
-        urlImage:
-            'https://images-na.ssl-images-amazon.com/images/I/91Sn67XUSHL.jpg',
-        title: 'Corte de Névoa e Furia',
-        autor: 'Sarah J. Maas',
-        description: 'Descrição',
-        favorite: true),
-    CardProfileItem(
-        urlImage:
-            'https://images-na.ssl-images-amazon.com/images/I/51AblvcjrJL._SX342_SY445_QL70_ML2_.jpg',
-        title: 'Corte de Espinho e Rosas',
-        autor: 'Sarah J. Maas',
-        description: 'Descrição',
-        favorite: true),
-  ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -117,11 +67,12 @@ class _ProfilePageState extends State<ProfilePage> {
             child: ListView.separated(
               scrollDirection: Axis.horizontal,
               padding: const EdgeInsets.only(top: 15.0),
-              itemCount: items.length,
+              itemCount: repository.getItens().length,
               separatorBuilder: (context, _) => const SizedBox(
                 width: 12.0,
               ),
-              itemBuilder: (context, index) => buildCards(item: items[index]),
+              itemBuilder: (context, index) =>
+                  buildCards(item: repository.getItens()[index]),
             ),
           ),
 
@@ -151,11 +102,12 @@ class _ProfilePageState extends State<ProfilePage> {
             child: ListView.separated(
               scrollDirection: Axis.horizontal,
               padding: const EdgeInsets.only(top: 15.0),
-              itemCount: items.length,
+              itemCount: repository.getItens().length,
               separatorBuilder: (context, _) => const SizedBox(
                 width: 12.0,
               ),
-              itemBuilder: (context, index) => buildCards(item: items[index]),
+              itemBuilder: (context, index) =>
+                  buildCards(item: repository.getItens()[index]),
             ),
           ),
         ],
