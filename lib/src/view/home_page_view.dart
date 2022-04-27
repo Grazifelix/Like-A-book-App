@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:likeabook_app/src/itemsTestClass.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -7,6 +8,8 @@ class HomePage extends StatefulWidget {
   @override
   State<HomePage> createState() => _HomePageState();
 }
+
+RepositoryItens repository = new RepositoryItens();
 
 class _HomePageState extends State<HomePage> {
   @override
@@ -45,18 +48,70 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
       body: ListView.separated(
-        padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 15.0),
-        itemCount: 6,
+        padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
+        itemCount: repository.getItens().length,
         separatorBuilder: (context, _) => const Divider(
           height: 3.0,
           thickness: 1.0,
         ),
-        itemBuilder: (context, index) => CardBook(),
+        itemBuilder: (context, index) =>
+            cardBook(item: repository.getItens()[index]),
       ),
     );
   }
 
-  Widget CardBook() => Container(
-        height: 181,
+  Widget cardBook({required CardProfileItem item}) => Container(
+        padding: const EdgeInsets.symmetric(vertical: 15.0),
+        height: 200,
+        child: Row(children: [
+          Material(
+            child: Ink.image(
+              image: NetworkImage(item.urlImage),
+              width: 125,
+              height: 181,
+              child: InkWell(
+                  hoverColor: const Color.fromARGB(86, 96, 79, 126),
+                  splashColor: const Color.fromARGB(86, 96, 79, 126),
+                  onTap: () =>
+                      {Navigator.pushNamed(context, '/book', arguments: item)}),
+            ),
+          ),
+          Container(
+            padding: const EdgeInsets.all(10.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                //há um problema de overflow do texto (texto ultrapassando limites da tela) para concertar depois
+                Text(
+                  item.title,
+                  style: TextStyle(fontSize: 25, fontWeight: FontWeight.w100),
+                ),
+                const SizedBox(height: 15),
+                Text(
+                  item.autor,
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w300),
+                ),
+                //classifição dos livros: criar uma função de mostragem de estrelas
+
+                Row(children: const [
+                  Icon(
+                    Icons.star,
+                    color: Color.fromARGB(255, 99, 85, 207),
+                    size: 34,
+                  ),
+                  Icon(Icons.star,
+                      color: Color.fromARGB(255, 99, 85, 207), size: 34),
+                  Icon(Icons.star,
+                      color: Color.fromARGB(255, 99, 85, 207), size: 34),
+                  Icon(Icons.star,
+                      color: Color.fromARGB(255, 99, 85, 207), size: 34),
+                  Icon(Icons.star,
+                      color: Color.fromARGB(255, 99, 85, 207), size: 34),
+                ])
+              ],
+            ),
+          ),
+        ]),
       );
 }
