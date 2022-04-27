@@ -67,6 +67,7 @@ class _HomePageState extends State<HomePage> {
           Material(
             child: Ink.image(
               image: NetworkImage(item.urlImage),
+              fit: BoxFit.cover,
               width: 125,
               height: 181,
               child: InkWell(
