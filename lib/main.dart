@@ -1,11 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:likeabook_app/src/view/book_page_view.dart';
 import 'package:likeabook_app/src/view/home_page_view.dart';
 import 'package:likeabook_app/src/view/login_page_view.dart';
 import 'package:likeabook_app/src/view/profile_page_view.dart';
 import 'package:likeabook_app/src/view/register_page_view.dart';
+//Configurações do Firebase do seu projeto
+import 'Firebase_config.dart';
 
-void main() {
+void main() async {
+  await Firebase.initializeApp(
+    options: FirebaseOptions(
+      apiKey: FirebaseConfig().apiKey,
+      appId: FirebaseConfig().appId,
+      messagingSenderId: FirebaseConfig().messagingSenderId,
+      projectId: FirebaseConfig().projectId,
+      authDomain: FirebaseConfig().authDomain,
+      storageBucket: FirebaseConfig().storageBucket,
+    ),
+  );
   runApp(const MyApp());
 }
 
