@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:likeabook_app/src/itemsTestClass.dart';
 
 class BookPage extends StatefulWidget {
   const BookPage({Key? key}) : super(key: key);
@@ -8,9 +9,12 @@ class BookPage extends StatefulWidget {
   State<BookPage> createState() => _BookPage();
 }
 
+RepositoryItens repository = new RepositoryItens();
+
 class _BookPage extends State<BookPage> {
   @override
   Widget build(BuildContext context) {
+    final itens = ModalRoute.of(context)!.settings.arguments as CardProfileItem;
     return Scaffold(
       appBar: AppBar(
         flexibleSpace: Container(
@@ -38,7 +42,109 @@ class _BookPage extends State<BookPage> {
           ),
         ],
       ),
-      body: Container(),
+      body: ListView(
+        padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+        children: [
+          Center(
+              child: Text(
+            itens.title,
+            style: const TextStyle(fontSize: 25, fontWeight: FontWeight.w100),
+          )),
+          const SizedBox(
+            height: 10,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                  alignment: Alignment.centerRight,
+                  width: 200,
+                  height: 231,
+                  child: Image.network(itens.urlImage)),
+              Column(
+                //criar funções para os butões
+                children: [
+                  IconButton(onPressed: () => {}, icon: Icon(Icons.save)),
+                  IconButton(onPressed: () => {}, icon: Icon(Icons.done)),
+                  IconButton(onPressed: () => {}, icon: Icon(Icons.favorite)),
+                ],
+              )
+            ],
+          ),
+          Center(
+              child: Text(
+            itens.autor,
+            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w200),
+          )),
+          //esquema de mostragem de estrelas: precisa criar uma função para isso
+          Row(mainAxisAlignment: MainAxisAlignment.center, children: const [
+            Icon(
+              Icons.star,
+              color: Color.fromARGB(255, 99, 85, 207),
+              size: 34,
+            ),
+            Icon(Icons.star, color: Color.fromARGB(255, 99, 85, 207), size: 34),
+            Icon(Icons.star, color: Color.fromARGB(255, 99, 85, 207), size: 34),
+            Icon(Icons.star, color: Color.fromARGB(255, 99, 85, 207), size: 34),
+            Icon(Icons.star, color: Color.fromARGB(255, 99, 85, 207), size: 34),
+          ]),
+          const Divider(
+            height: 3.0,
+            thickness: 1.0,
+          ),
+          Center(child: Text(itens.description)),
+          const Divider(
+            height: 3.0,
+            thickness: 1.0,
+          ),
+
+          //Este list view esta recebendo itens do repositório, mas no futuro será do algoritmo de recomendação
+          //de livros semelhantes ao livro clicado
+          Container(
+            padding: const EdgeInsets.only(
+              bottom: 15,
+            ),
+            height: 200,
+            child: ListView.separated(
+              scrollDirection: Axis.horizontal,
+              padding: const EdgeInsets.only(top: 15.0),
+              itemCount: repository.getItens().length,
+              separatorBuilder: (context, _) => const SizedBox(
+                width: 12.0,
+              ),
+              itemBuilder: (context, index) =>
+                  buildCards(item: repository.getItens()[index]),
+            ),
+          ),
+
+          const Divider(
+            height: 3.0,
+            thickness: 1.0,
+          ),
+        ],
+      ),
     );
   }
+
+//Este card build esta recebendo itens do repositório, mas no futuro será do algoritmo de recomendação
+//de livros semelhantes ao livro clicado
+  Widget buildCards({required CardProfileItem item}) => SizedBox(
+        width: 111,
+        child: Column(children: [
+          Expanded(
+            child: Material(
+              child: Ink.image(
+                image: NetworkImage(item.urlImage),
+                fit: BoxFit.cover,
+                child: InkWell(
+                  hoverColor: const Color.fromARGB(86, 96, 79, 126),
+                  splashColor: const Color.fromARGB(86, 96, 79, 126),
+                  onTap: () =>
+                      {Navigator.pushNamed(context, '/book', arguments: item)},
+                ),
+              ),
+            ),
+          ),
+        ]),
+      );
 }
