@@ -44,7 +44,19 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-      body: Container(),
+      body: ListView.separated(
+        padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 15.0),
+        itemCount: 6,
+        separatorBuilder: (context, _) => const Divider(
+          height: 3.0,
+          thickness: 1.0,
+        ),
+        itemBuilder: (context, index) => CardBook(),
+      ),
     );
   }
+
+  Widget CardBook() => Container(
+        height: 181,
+      );
 }
