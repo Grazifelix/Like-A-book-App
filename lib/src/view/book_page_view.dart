@@ -30,7 +30,7 @@ class _BookPage extends State<BookPage> {
           Row(
             children: <Widget>[
               IconButton(
-                onPressed: () => {},
+                onPressed: () => {Navigator.pushNamed(context, '/profile')},
                 icon: const Icon(Icons.person),
                 tooltip: "Profile",
               )
