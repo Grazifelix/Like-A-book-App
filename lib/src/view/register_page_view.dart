@@ -11,6 +11,7 @@ class RegisterPage extends StatefulWidget {
 
 class _RegisterPageState extends State<RegisterPage> {
   final _formKey = GlobalKey<FormState>();
+  String? error = '';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -151,9 +152,11 @@ class _RegisterPageState extends State<RegisterPage> {
                   borderRadius: const BorderRadius.all(
                     Radius.circular(30),
                   ),
-                  onTap: () {
+                  onTap: () async {
                     if (_formKey.currentState!.validate()) {
-                      registerInFirebase();
+                      var result = await registerInFirebase();
+                      setState(() => error = result);
+                      print(error);
                     }
                   },
                   child: Ink(

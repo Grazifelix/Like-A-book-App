@@ -10,6 +10,8 @@ class LoginHomePage extends StatefulWidget {
 }
 
 class _LoginHomePageState extends State<LoginHomePage> {
+  final _formkey = GlobalKey<FormState>();
+  String? error = '';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,49 +41,56 @@ class _LoginHomePageState extends State<LoginHomePage> {
           const SizedBox(
             height: 20,
           ),
-          TextFormField(
-            validator: (value) => validateEmail(value!),
-            keyboardType: TextInputType.emailAddress,
-            decoration: const InputDecoration(
-              enabledBorder: UnderlineInputBorder(
-                borderSide:
-                    BorderSide(color: Color.fromARGB(128, 255, 255, 255)),
-              ),
-              focusedBorder: UnderlineInputBorder(
-                borderSide:
-                    BorderSide(color: Color.fromARGB(128, 255, 255, 255)),
-              ),
-              floatingLabelStyle:
-                  TextStyle(color: Color.fromARGB(128, 255, 255, 255)),
-              labelText: "Email",
-              labelStyle: TextStyle(
-                  color: Color.fromARGB(128, 255, 255, 255),
-                  fontWeight: FontWeight.w400,
-                  fontSize: 20),
-            ),
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          TextFormField(
-            keyboardType: TextInputType.visiblePassword,
-            validator: (value) => validatePassword(value!),
-            decoration: const InputDecoration(
-              enabledBorder: UnderlineInputBorder(
-                borderSide:
-                    BorderSide(color: Color.fromARGB(128, 255, 255, 255)),
-              ),
-              focusedBorder: UnderlineInputBorder(
-                borderSide:
-                    BorderSide(color: Color.fromARGB(128, 255, 255, 255)),
-              ),
-              floatingLabelStyle:
-                  TextStyle(color: Color.fromARGB(128, 255, 255, 255)),
-              labelText: "Senha",
-              labelStyle: TextStyle(
-                  color: Color.fromARGB(128, 255, 255, 255),
-                  fontWeight: FontWeight.w400,
-                  fontSize: 20),
+          Form(
+            key: _formkey,
+            child: Column(
+              children: [
+                TextFormField(
+                  validator: (value) => validateEmail(value!),
+                  keyboardType: TextInputType.emailAddress,
+                  decoration: const InputDecoration(
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide:
+                          BorderSide(color: Color.fromARGB(128, 255, 255, 255)),
+                    ),
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide:
+                          BorderSide(color: Color.fromARGB(128, 255, 255, 255)),
+                    ),
+                    floatingLabelStyle:
+                        TextStyle(color: Color.fromARGB(128, 255, 255, 255)),
+                    labelText: "Email",
+                    labelStyle: TextStyle(
+                        color: Color.fromARGB(128, 255, 255, 255),
+                        fontWeight: FontWeight.w400,
+                        fontSize: 20),
+                  ),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                TextFormField(
+                  keyboardType: TextInputType.visiblePassword,
+                  validator: (value) => validatePassword(value!),
+                  decoration: const InputDecoration(
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide:
+                          BorderSide(color: Color.fromARGB(128, 255, 255, 255)),
+                    ),
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide:
+                          BorderSide(color: Color.fromARGB(128, 255, 255, 255)),
+                    ),
+                    floatingLabelStyle:
+                        TextStyle(color: Color.fromARGB(128, 255, 255, 255)),
+                    labelText: "Senha",
+                    labelStyle: TextStyle(
+                        color: Color.fromARGB(128, 255, 255, 255),
+                        fontWeight: FontWeight.w400,
+                        fontSize: 20),
+                  ),
+                ),
+              ],
             ),
           ),
           const SizedBox(
@@ -95,7 +104,15 @@ class _LoginHomePageState extends State<LoginHomePage> {
                 borderRadius: const BorderRadius.all(
                   Radius.circular(30),
                 ),
-                onTap: () => sendtoFirebase(),
+                onTap: () async {
+                  if (_formkey.currentState!.validate()) {
+                    var result = await signInFirebase();
+                    if (result != null) {
+                      setState(() => error = result);
+                      print(error);
+                    }
+                  }
+                },
                 child: Ink(
                   height: 54,
                   width: double.maxFinite,
