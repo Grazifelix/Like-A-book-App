@@ -47,7 +47,8 @@ String? confirmPassword(String password2) {
 
 Future<String?> registerInFirebase() async {
   try {
-    UserCredential result = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+    UserCredential result =
+        await FirebaseAuth.instance.createUserWithEmailAndPassword(
       email: localUser.getEmail,
       password: localUser.getPassword,
     );
@@ -56,6 +57,11 @@ Future<String?> registerInFirebase() async {
     user.updateDisplayName(localUser.getName);
     return null;
   } catch (error) {
-    return error.toString();
+    if (error.toString() ==
+        '[firebase_auth/email-already-in-use] The email address is already in use by another account.') {
+      return 'Email já cadastrado';
+    } else {
+      return error.toString();
+    }
   }
 }

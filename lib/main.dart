@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
         appBarTheme: const AppBarTheme(
             backgroundColor: Color.fromARGB(255, 99, 85, 207)),
       ),
-      initialRoute: '/',
+      initialRoute: LoginHomePage.routeName,
       routes: {
         LoginHomePage.routeName: (context) => const LoginHomePage(),
         RegisterPage.routeName: (context) => const RegisterPage(),

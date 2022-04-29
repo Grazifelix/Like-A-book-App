@@ -3,7 +3,7 @@ import 'package:likeabook_app/src/controller/login_page_controller.dart';
 
 class LoginHomePage extends StatefulWidget {
   const LoginHomePage({Key? key}) : super(key: key);
-  static const routeName = '/';
+  static const routeName = '/login';
 
   @override
   State<LoginHomePage> createState() => _LoginHomePageState();
@@ -11,7 +11,7 @@ class LoginHomePage extends StatefulWidget {
 
 class _LoginHomePageState extends State<LoginHomePage> {
   final _formkey = GlobalKey<FormState>();
-  String? error = '';
+  String error = '';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -106,10 +106,13 @@ class _LoginHomePageState extends State<LoginHomePage> {
                 ),
                 onTap: () async {
                   if (_formkey.currentState!.validate()) {
-                    var result = await signInFirebase();
-                    if (result != null) {
-                      setState(() => error = result);
-                      print(error);
+                    var resultError = await signInFirebase();
+                    if (resultError == null) {
+                      Navigator.popAndPushNamed(context, '/home');
+                    } else {
+                      setState(() => error = resultError);
+                      ScaffoldMessenger.of(context)
+                          .showSnackBar(SnackBar(content: Text(error)));
                     }
                   }
                 },
@@ -152,7 +155,7 @@ class _LoginHomePageState extends State<LoginHomePage> {
                     color: Color.fromARGB(128, 255, 255, 255), fontSize: 18),
               ),
               onPressed: () {
-                Navigator.pushNamed(context, '/cadastro');
+                Navigator.popAndPushNamed(context, '/cadastro');
               }),
         ],
       ),

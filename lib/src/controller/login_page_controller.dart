@@ -33,6 +33,14 @@ Future<String?> signInFirebase() async {
     localUser.setName = user.displayName!;
     return null;
   } catch (error) {
-    return error.toString();
+    if (error.toString() ==
+        '[firebase_auth/wrong-password] The password is invalid or the user does not have a password.') {
+      return 'senha incorreta';
+    } else if (error.toString() ==
+        '[firebase_auth/user-not-found] There is no user record corresponding to this identifier. The user may have been deleted.') {
+      return 'Email não cadastrado';
+    }else{
+      return error.toString();
+    }
   }
 }
