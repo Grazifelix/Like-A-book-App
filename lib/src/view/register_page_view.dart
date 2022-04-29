@@ -194,6 +194,19 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
               ),
             ),
+            const SizedBox(
+              height: 8,
+            ),
+            TextButton(
+              child: const Text(
+                "Login",
+                style: TextStyle(
+                    color: Color.fromARGB(128, 255, 255, 255), fontSize: 18),
+              ),
+              onPressed: () {
+                Navigator.popAndPushNamed(context, '/login');
+              },
+            ),
           ],
         ),
       ),

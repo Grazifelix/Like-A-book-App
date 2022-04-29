@@ -9,7 +9,7 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-RepositoryItens repository = new RepositoryItens();
+RepositoryItens repository = RepositoryItens();
 
 class _HomePageState extends State<HomePage> {
   @override
