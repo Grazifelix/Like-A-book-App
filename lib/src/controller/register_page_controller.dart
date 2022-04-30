@@ -45,11 +45,23 @@ String? confirmPassword(String password2) {
   }
 }
 
-void registerInFirebase() async {
+Future<String?> registerInFirebase() async {
   try {
-    await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: localUser.getEmail, password: localUser.getPassword);
-  } catch (e) {
-    print(e);
+    UserCredential result =
+        await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      email: localUser.getEmail,
+      password: localUser.getPassword,
+    );
+    User user = result.user!;
+    localUser.setUserId = user.uid;
+    user.updateDisplayName(localUser.getName);
+    return null;
+  } catch (error) {
+    if (error.toString() ==
+        '[firebase_auth/email-already-in-use] The email address is already in use by another account.') {
+      return 'Email já cadastrado';
+    } else {
+      return error.toString();
+    }
   }
 }

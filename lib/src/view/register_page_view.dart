@@ -11,6 +11,7 @@ class RegisterPage extends StatefulWidget {
 
 class _RegisterPageState extends State<RegisterPage> {
   final _formKey = GlobalKey<FormState>();
+  String error = '';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -144,47 +145,68 @@ class _RegisterPageState extends State<RegisterPage> {
               height: 50,
             ),
             Material(
+              borderRadius: const BorderRadius.all(
+                Radius.circular(30),
+              ),
+              child: InkWell(
                 borderRadius: const BorderRadius.all(
                   Radius.circular(30),
                 ),
-                child: InkWell(
-                  borderRadius: const BorderRadius.all(
-                    Radius.circular(30),
-                  ),
-                  onTap: () {
-                    if (_formKey.currentState!.validate()) {
-                      registerInFirebase();
+                onTap: () async {
+                  if (_formKey.currentState!.validate()) {
+                    var resultError = await registerInFirebase();
+                    if (resultError == null) {
+                      Navigator.popAndPushNamed(context, '/home');
+                    } else {
+                      setState(() => error = resultError);
+                      ScaffoldMessenger.of(context)
+                          .showSnackBar(SnackBar(content: Text(error)));
                     }
-                  },
-                  child: Ink(
-                    height: 54,
-                    width: double.maxFinite,
-                    decoration: const BoxDecoration(
-                        gradient: LinearGradient(
-                            begin: Alignment.topLeft,
-                            end: Alignment.bottomRight,
-                            stops: [
-                              0.0,
-                              0.45,
-                              0.9
-                            ],
-                            colors: [
-                              Color.fromARGB(146, 255, 255, 255),
-                              Color.fromARGB(45, 127, 116, 206),
-                              Color.fromARGB(100, 137, 137, 137),
-                            ]),
-                        borderRadius: BorderRadius.all(Radius.circular(30))),
-                    child: const Center(
-                      child: Text(
-                        'Cadastrar',
-                        style: TextStyle(
-                          color: Color.fromARGB(255, 127, 116, 206),
-                          fontSize: 20,
-                        ),
+                  }
+                },
+                child: Ink(
+                  height: 54,
+                  width: double.maxFinite,
+                  decoration: const BoxDecoration(
+                      gradient: LinearGradient(
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                          stops: [
+                            0.0,
+                            0.45,
+                            0.9
+                          ],
+                          colors: [
+                            Color.fromARGB(146, 255, 255, 255),
+                            Color.fromARGB(45, 127, 116, 206),
+                            Color.fromARGB(100, 137, 137, 137),
+                          ]),
+                      borderRadius: BorderRadius.all(Radius.circular(30))),
+                  child: const Center(
+                    child: Text(
+                      'Cadastrar',
+                      style: TextStyle(
+                        color: Color.fromARGB(255, 127, 116, 206),
+                        fontSize: 20,
                       ),
                     ),
                   ),
-                ))
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 8,
+            ),
+            TextButton(
+              child: const Text(
+                "Login",
+                style: TextStyle(
+                    color: Color.fromARGB(128, 255, 255, 255), fontSize: 18),
+              ),
+              onPressed: () {
+                Navigator.popAndPushNamed(context, '/login');
+              },
+            ),
           ],
         ),
       ),

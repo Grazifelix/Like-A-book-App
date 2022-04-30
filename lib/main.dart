@@ -6,7 +6,7 @@ import 'package:likeabook_app/src/view/login_page_view.dart';
 import 'package:likeabook_app/src/view/profile_page_view.dart';
 import 'package:likeabook_app/src/view/register_page_view.dart';
 //Configurações do Firebase do seu projeto
-import 'Firebase_config.dart';
+import 'firebase_config.dart';
 
 void main() async {
   await Firebase.initializeApp(
@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
         appBarTheme: const AppBarTheme(
             backgroundColor: Color.fromARGB(255, 99, 85, 207)),
       ),
-      initialRoute: '/',
+      initialRoute: LoginHomePage.routeName,
       routes: {
         LoginHomePage.routeName: (context) => const LoginHomePage(),
         RegisterPage.routeName: (context) => const RegisterPage(),
