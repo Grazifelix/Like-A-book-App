@@ -33,9 +33,9 @@ class _ProfilePageState extends State<ProfilePage> {
           Row(
             children: <Widget>[
               IconButton(
-                onPressed: () => {},
-                icon: const Icon(Icons.exit_to_app_outlined),
-                tooltip: "Logout",
+                onPressed: () => Navigator.pushNamed(context, '/settings'),
+                icon: const Icon(Icons.settings),
+                tooltip: "Configurações",
               )
             ],
           ),

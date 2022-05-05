@@ -5,6 +5,7 @@ import 'package:likeabook_app/src/view/home_page_view.dart';
 import 'package:likeabook_app/src/view/login_page_view.dart';
 import 'package:likeabook_app/src/view/profile_page_view.dart';
 import 'package:likeabook_app/src/view/register_page_view.dart';
+import 'package:likeabook_app/src/view/profile_settings_view.dart';
 //Configurações do Firebase do seu projeto
 import 'firebase_config.dart';
 
@@ -42,6 +43,7 @@ class MyApp extends StatelessWidget {
         HomePage.routeName: (context) => const HomePage(),
         ProfilePage.routeName: (context) => const ProfilePage(),
         BookPage.routeName: (context) => const BookPage(),
+        ProfileSettingsPage.routeName: (context) => const ProfileSettingsPage(),
       },
     );
   }
