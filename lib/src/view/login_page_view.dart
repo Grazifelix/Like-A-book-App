@@ -97,54 +97,55 @@ class _LoginHomePageState extends State<LoginHomePage> {
               height: 50,
             ),
             Material(
+              borderRadius: const BorderRadius.all(
+                Radius.circular(30),
+              ),
+              child: InkWell(
                 borderRadius: const BorderRadius.all(
                   Radius.circular(30),
                 ),
-                child: InkWell(
-                  borderRadius: const BorderRadius.all(
-                    Radius.circular(30),
-                  ),
-                  onTap: () async {
-                    if (_formkey.currentState!.validate()) {
-                      var resultError = await signInFirebase();
-                      if (resultError == null) {
-                        Navigator.popAndPushNamed(context, '/home');
-                      } else {
-                        setState(() => error = resultError);
-                        ScaffoldMessenger.of(context)
-                            .showSnackBar(SnackBar(content: Text(error)));
-                      }
+                onTap: () async {
+                  if (_formkey.currentState!.validate()) {
+                    var resultError = await signInFirebase();
+                    if (resultError == null) {
+                      Navigator.popAndPushNamed(context, '/home');
+                    } else {
+                      setState(() => error = resultError);
+                      ScaffoldMessenger.of(context)
+                          .showSnackBar(SnackBar(content: Text(error)));
                     }
-                  },
-                  child: Ink(
-                    height: 54,
-                    width: double.maxFinite,
-                    decoration: const BoxDecoration(
-                        gradient: LinearGradient(
-                            begin: Alignment.topLeft,
-                            end: Alignment.bottomRight,
-                            stops: [
-                              0.0,
-                              0.45,
-                              0.9
-                            ],
-                            colors: [
-                              Color.fromARGB(146, 255, 255, 255),
-                              Color.fromARGB(45, 127, 116, 206),
-                              Color.fromARGB(100, 137, 137, 137),
-                            ]),
-                        borderRadius: BorderRadius.all(Radius.circular(30))),
-                    child: const Center(
-                      child: Text(
-                        'Login',
-                        style: TextStyle(
-                          color: Color.fromARGB(255, 127, 116, 206),
-                          fontSize: 20,
-                        ),
+                  }
+                },
+                child: Ink(
+                  height: 54,
+                  width: double.maxFinite,
+                  decoration: const BoxDecoration(
+                      gradient: LinearGradient(
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                          stops: [
+                            0.0,
+                            0.45,
+                            0.9
+                          ],
+                          colors: [
+                            Color.fromARGB(146, 255, 255, 255),
+                            Color.fromARGB(45, 127, 116, 206),
+                            Color.fromARGB(100, 137, 137, 137),
+                          ]),
+                      borderRadius: BorderRadius.all(Radius.circular(30))),
+                  child: const Center(
+                    child: Text(
+                      'Login',
+                      style: TextStyle(
+                        color: Color.fromARGB(255, 127, 116, 206),
+                        fontSize: 20,
                       ),
                     ),
                   ),
-                )),
+                ),
+              ),
+            ),
             const SizedBox(
               height: 8,
             ),
