@@ -1,3 +1,4 @@
+import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:likeabook_app/src/controller/login_page_controller.dart';
 
@@ -15,11 +16,23 @@ String? validatePassword(String password) {
   return null;
 }
 
-String getName() {
-  return localUser.getName;
-}
+String getName() => localUser.getName;
+String getEmail() => localUser.getEmail;
 
 void updateName(String name) {
   FirebaseAuth.instance.currentUser!.updateDisplayName(name);
   localUser.setName = name;
+}
+
+String? validateEmail(String email) {
+  bool isValid = EmailValidator.validate(email);
+  if (!isValid) {
+    return 'email inválido';
+  }
+  return null;
+}
+
+void updateEmail(String email) {
+    FirebaseAuth.instance.currentUser!.updateEmail(email);
+    localUser.setEmail = email;
 }

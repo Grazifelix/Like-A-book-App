@@ -11,6 +11,7 @@ class ProfileSettingsPage extends StatefulWidget {
 
 class _ProfileSettingsPageState extends State<ProfileSettingsPage> {
   final _nameFormKey = GlobalKey<FormState>();
+  final _emailFormKey = GlobalKey<FormState>();
   bool check1 = false;
   bool check2 = false;
 
@@ -211,7 +212,133 @@ class _ProfileSettingsPageState extends State<ProfileSettingsPage> {
             child: const Text('Alterar Nome'),
           ),
           TextButton(
-            onPressed: () => {},
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    title: const Text('Alterar Email'),
+                    content: Form(
+                      key: _emailFormKey,
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          TextFormField(
+                            keyboardType: TextInputType.emailAddress,
+                            initialValue: getEmail(),
+                            decoration:
+                                const InputDecoration(labelText: "Email"),
+                            validator: (value) => validateEmail(value!),
+                            onSaved: (value) => updateEmail(value!),
+                          ),
+                          TextFormField(
+                            obscureText: true,
+                            keyboardType: TextInputType.visiblePassword,
+                            decoration:
+                                const InputDecoration(labelText: 'Senha'),
+                            validator: (value) => validatePassword(value!),
+                          ),
+                        ],
+                      ),
+                    ),
+                    actions: [
+                      Row(
+                        children: [
+                          Material(
+                            borderRadius: const BorderRadius.all(
+                              Radius.circular(30),
+                            ),
+                            child: InkWell(
+                              borderRadius: const BorderRadius.all(
+                                Radius.circular(30),
+                              ),
+                              onTap: () => Navigator.pop(context),
+                              child: Ink(
+                                height: 40,
+                                width: 80,
+                                decoration: const BoxDecoration(
+                                    gradient: LinearGradient(
+                                        begin: Alignment.topLeft,
+                                        end: Alignment.bottomRight,
+                                        stops: [
+                                          0.0,
+                                          0.4,
+                                          0.6,
+                                          1.0
+                                        ],
+                                        colors: [
+                                          Color.fromARGB(255, 99, 85, 207),
+                                          Color.fromARGB(255, 117, 102, 212),
+                                          Color.fromARGB(255, 123, 103, 255),
+                                          Color.fromARGB(255, 99, 85, 207)
+                                        ]),
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(30))),
+                                child: const Center(
+                                  child: Text(
+                                    'Cancelar',
+                                    style: TextStyle(
+                                      color: Color.fromARGB(255, 255, 255, 255),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(width: 60),
+                          Material(
+                            borderRadius: const BorderRadius.all(
+                              Radius.circular(30),
+                            ),
+                            child: InkWell(
+                              borderRadius: const BorderRadius.all(
+                                Radius.circular(30),
+                              ),
+                              onTap: () {
+                                if (_emailFormKey.currentState!.validate()) {
+                                  _emailFormKey.currentState!.save();
+                                  Navigator.pop(context);
+                                }
+                              },
+                              child: Ink(
+                                height: 40,
+                                width: 180,
+                                decoration: const BoxDecoration(
+                                    gradient: LinearGradient(
+                                        begin: Alignment.topLeft,
+                                        end: Alignment.bottomRight,
+                                        stops: [
+                                          0.0,
+                                          0.4,
+                                          0.6,
+                                          1.0
+                                        ],
+                                        colors: [
+                                          Color.fromARGB(255, 99, 85, 207),
+                                          Color.fromARGB(255, 117, 102, 212),
+                                          Color.fromARGB(255, 123, 103, 255),
+                                          Color.fromARGB(255, 99, 85, 207)
+                                        ]),
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(30))),
+                                child: const Center(
+                                  child: Text(
+                                    'Confirmar Alterações',
+                                    style: TextStyle(
+                                      color: Color.fromARGB(255, 255, 255, 255),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      )
+                    ],
+                  );
+                },
+              );
+            },
             child: const Text('Alterar Email'),
           ),
           TextButton(
