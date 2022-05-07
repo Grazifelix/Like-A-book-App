@@ -33,6 +33,32 @@ String? validateEmail(String email) {
 }
 
 void updateEmail(String email) {
-    FirebaseAuth.instance.currentUser!.updateEmail(email);
-    localUser.setEmail = email;
+  FirebaseAuth.instance.currentUser!.updateEmail(email);
+  localUser.setEmail = email;
+}
+
+String newpassword = '';
+String? validateNewPassword(String password) {
+  var reg = RegExp(r'(?=.*\d)(?=.*[a-z])[\w]', caseSensitive: false);
+  if (password.isEmpty) {
+    return 'insira uma senha';
+  } else if (password.length < 6 || password.length > 20) {
+    return 'A senha deve ter entre 6 a 20 caracteres';
+  } else if (!reg.hasMatch(password)) {
+    return 'A senha deve conter letras e números';
+  }
+  newpassword = password;
+  return null;
+}
+
+String? confirmNewPassword(String password) {
+  if (password != newpassword) {
+    return 'As senhas devem ser iguais';
+  }
+  return null;
+}
+
+void updatePassword(String password) {
+  FirebaseAuth.instance.currentUser!.updatePassword(password);
+  localUser.setPassword = password;
 }
