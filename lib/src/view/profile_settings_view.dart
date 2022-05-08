@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:likeabook_app/src/controller/profile_settings_controller.dart';
+import 'package:likeabook_app/src/model/user_model.dart';
 
 class ProfileSettingsPage extends StatefulWidget {
   const ProfileSettingsPage({Key? key}) : super(key: key);
@@ -18,6 +19,8 @@ class _ProfileSettingsPageState extends State<ProfileSettingsPage> {
 
   @override
   Widget build(BuildContext context) {
+    final localUser = ModalRoute.of(context)!.settings.arguments as LocalUser;
+    ProfileControl profileControl = ProfileControl(localUser);
     return Scaffold(
       appBar: AppBar(
         flexibleSpace: Container(
@@ -38,7 +41,8 @@ class _ProfileSettingsPageState extends State<ProfileSettingsPage> {
             children: <Widget>[
               IconButton(
                 onPressed: () => Navigator.pushNamedAndRemoveUntil(
-                    context, '/home', (route) => false),
+                    context, '/home', (route) => false,
+                    arguments: localUser),
                 icon: const Icon(Icons.home_outlined),
                 tooltip: "home",
               )
@@ -96,18 +100,18 @@ class _ProfileSettingsPageState extends State<ProfileSettingsPage> {
                         children: [
                           TextFormField(
                             keyboardType: TextInputType.name,
-                            initialValue: getName(),
+                            initialValue: localUser.getName,
                             decoration:
                                 const InputDecoration(labelText: "Nome"),
-                            validator: (value) => validateName(value!),
-                            onSaved: (value) => updateName(value!),
+                            validator: (value) => profileControl.validateName(value!),
+                            onSaved: (value) => profileControl.updateName(value!),
                           ),
                           TextFormField(
                             obscureText: true,
                             keyboardType: TextInputType.visiblePassword,
                             decoration:
                                 const InputDecoration(labelText: 'Senha'),
-                            validator: (value) => validatePassword(value!),
+                            validator: (value) => profileControl.validatePassword(value!),
                           ),
                         ],
                       ),
@@ -226,18 +230,18 @@ class _ProfileSettingsPageState extends State<ProfileSettingsPage> {
                         children: [
                           TextFormField(
                             keyboardType: TextInputType.emailAddress,
-                            initialValue: getEmail(),
+                            initialValue: localUser.getEmail,
                             decoration:
                                 const InputDecoration(labelText: "Email"),
-                            validator: (value) => validateEmail(value!),
-                            onSaved: (value) => updateEmail(value!),
+                            validator: (value) => profileControl.validateEmail(value!),
+                            onSaved: (value) => profileControl.updateEmail(value!),
                           ),
                           TextFormField(
                             obscureText: true,
                             keyboardType: TextInputType.visiblePassword,
                             decoration:
                                 const InputDecoration(labelText: 'Senha'),
-                            validator: (value) => validatePassword(value!),
+                            validator: (value) => profileControl.validatePassword(value!),
                           ),
                         ],
                       ),
@@ -358,21 +362,21 @@ class _ProfileSettingsPageState extends State<ProfileSettingsPage> {
                             keyboardType: TextInputType.visiblePassword,
                             decoration:
                                 const InputDecoration(labelText: "Nova senha"),
-                            validator: (value) => validateNewPassword(value!),
-                            onSaved: (value) => updatePassword(value!),
+                            validator: (value) => profileControl.validateNewPassword(value!),
+                            onSaved: (value) => profileControl.updatePassword(value!),
                           ),
                           TextFormField(
                             keyboardType: TextInputType.visiblePassword,
-                            decoration:
-                                const InputDecoration(labelText: "Confirmar Nova senha"),
-                            validator: (value) => confirmNewPassword(value!),
+                            decoration: const InputDecoration(
+                                labelText: "Confirmar Nova senha"),
+                            validator: (value) => profileControl.confirmNewPassword(value!),
                           ),
                           TextFormField(
                             obscureText: true,
                             keyboardType: TextInputType.visiblePassword,
-                            decoration:
-                                const InputDecoration(labelText: 'Senha antiga'),
-                            validator: (value) => validatePassword(value!),
+                            decoration: const InputDecoration(
+                                labelText: 'Senha antiga'),
+                            validator: (value) => profileControl.validatePassword(value!),
                           ),
                         ],
                       ),
