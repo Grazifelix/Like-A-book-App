@@ -63,4 +63,9 @@ class ProfileControl {
     FirebaseAuth.instance.currentUser!.updatePassword(password);
     localUser.setPassword = password;
   }
+
+  void logout() async{
+    await FirebaseAuth.instance.signOut();
+    localUser.singOut();
+  }
 }

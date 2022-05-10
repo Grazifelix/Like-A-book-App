@@ -12,4 +12,11 @@ class LocalUser {
   set setPassword(String password) => _password = password;
   set setName(String name) => _name = name;
   set setUserId(String uid) => _userId = uid;
+
+  void singOut() {
+    _userId = '';
+    _name = '';
+    _email = '';
+    _password = '';
+  }
 }

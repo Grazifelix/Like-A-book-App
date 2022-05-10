@@ -51,6 +51,7 @@ class _ProfileSettingsPageState extends State<ProfileSettingsPage> {
         ],
       ),
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Text('Modo da recomendação'),
           const Divider(),
@@ -103,15 +104,18 @@ class _ProfileSettingsPageState extends State<ProfileSettingsPage> {
                             initialValue: localUser.getName,
                             decoration:
                                 const InputDecoration(labelText: "Nome"),
-                            validator: (value) => profileControl.validateName(value!),
-                            onSaved: (value) => profileControl.updateName(value!),
+                            validator: (value) =>
+                                profileControl.validateName(value!),
+                            onSaved: (value) =>
+                                profileControl.updateName(value!),
                           ),
                           TextFormField(
                             obscureText: true,
                             keyboardType: TextInputType.visiblePassword,
                             decoration:
                                 const InputDecoration(labelText: 'Senha'),
-                            validator: (value) => profileControl.validatePassword(value!),
+                            validator: (value) =>
+                                profileControl.validatePassword(value!),
                           ),
                         ],
                       ),
@@ -233,15 +237,18 @@ class _ProfileSettingsPageState extends State<ProfileSettingsPage> {
                             initialValue: localUser.getEmail,
                             decoration:
                                 const InputDecoration(labelText: "Email"),
-                            validator: (value) => profileControl.validateEmail(value!),
-                            onSaved: (value) => profileControl.updateEmail(value!),
+                            validator: (value) =>
+                                profileControl.validateEmail(value!),
+                            onSaved: (value) =>
+                                profileControl.updateEmail(value!),
                           ),
                           TextFormField(
                             obscureText: true,
                             keyboardType: TextInputType.visiblePassword,
                             decoration:
                                 const InputDecoration(labelText: 'Senha'),
-                            validator: (value) => profileControl.validatePassword(value!),
+                            validator: (value) =>
+                                profileControl.validatePassword(value!),
                           ),
                         ],
                       ),
@@ -362,21 +369,25 @@ class _ProfileSettingsPageState extends State<ProfileSettingsPage> {
                             keyboardType: TextInputType.visiblePassword,
                             decoration:
                                 const InputDecoration(labelText: "Nova senha"),
-                            validator: (value) => profileControl.validateNewPassword(value!),
-                            onSaved: (value) => profileControl.updatePassword(value!),
+                            validator: (value) =>
+                                profileControl.validateNewPassword(value!),
+                            onSaved: (value) =>
+                                profileControl.updatePassword(value!),
                           ),
                           TextFormField(
                             keyboardType: TextInputType.visiblePassword,
                             decoration: const InputDecoration(
                                 labelText: "Confirmar Nova senha"),
-                            validator: (value) => profileControl.confirmNewPassword(value!),
+                            validator: (value) =>
+                                profileControl.confirmNewPassword(value!),
                           ),
                           TextFormField(
                             obscureText: true,
                             keyboardType: TextInputType.visiblePassword,
                             decoration: const InputDecoration(
                                 labelText: 'Senha antiga'),
-                            validator: (value) => profileControl.validatePassword(value!),
+                            validator: (value) =>
+                                profileControl.validatePassword(value!),
                           ),
                         ],
                       ),
@@ -483,6 +494,7 @@ class _ProfileSettingsPageState extends State<ProfileSettingsPage> {
           ),
           TextButton(
             onPressed: () {
+              profileControl.logout();
               Navigator.pushNamedAndRemoveUntil(
                   context, '/login', (route) => false);
             },
