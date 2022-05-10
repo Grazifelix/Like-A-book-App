@@ -14,6 +14,7 @@ RepositoryItens repository = RepositoryItens();
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
+    final localUser = ModalRoute.of(context)!.settings.arguments;
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -55,12 +56,12 @@ class _HomePageState extends State<HomePage> {
           thickness: 1.0,
         ),
         itemBuilder: (context, index) =>
-            cardBook(item: repository.getItens()[index]),
+            cardBook(localUser, item: repository.getItens()[index]),
       ),
     );
   }
 
-  Widget cardBook({required CardProfileItem item}) => Container(
+  Widget cardBook(localUser, {required CardProfileItem item}) => Container(
         padding: const EdgeInsets.symmetric(vertical: 15.0),
         height: 200,
         child: Row(children: [
@@ -73,8 +74,13 @@ class _HomePageState extends State<HomePage> {
               child: InkWell(
                   hoverColor: const Color.fromARGB(86, 96, 79, 126),
                   splashColor: const Color.fromARGB(86, 96, 79, 126),
-                  onTap: () =>
-                      {Navigator.pushNamed(context, '/book', arguments: item)}),
+                  onTap: () => {
+                        Navigator.pushNamed(
+                          context,
+                          '/book',
+                          arguments: [item, localUser],
+                        )
+                      }),
             ),
           ),
           Container(

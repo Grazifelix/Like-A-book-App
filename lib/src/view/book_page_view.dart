@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:likeabook_app/src/itemsTestClass.dart';
+import 'package:likeabook_app/src/controller/book_page_controller.dart';
 
 class BookPage extends StatefulWidget {
   const BookPage({Key? key}) : super(key: key);
@@ -9,12 +10,15 @@ class BookPage extends StatefulWidget {
   State<BookPage> createState() => _BookPage();
 }
 
-RepositoryItens repository = new RepositoryItens();
+RepositoryItens repository = RepositoryItens();
 
 class _BookPage extends State<BookPage> {
   @override
   Widget build(BuildContext context) {
-    final itens = ModalRoute.of(context)!.settings.arguments as CardProfileItem;
+    final argumentsList = ModalRoute.of(context)!.settings.arguments as List;
+    CardProfileItem itens = argumentsList[0];
+    var localUser = argumentsList[1];
+    BookPageController bookPageController = BookPageController(localUser);
     return Scaffold(
       appBar: AppBar(
         flexibleSpace: Container(
@@ -64,9 +68,28 @@ class _BookPage extends State<BookPage> {
               Column(
                 //criar funções para os butões
                 children: [
-                  IconButton(onPressed: () => {}, icon: Icon(Icons.save)),
-                  IconButton(onPressed: () => {}, icon: Icon(Icons.done)),
-                  IconButton(onPressed: () => {}, icon: Icon(Icons.favorite)),
+                  IconButton(onPressed: () => {
+                    if(bookPageController.isReadingbook(itens)){
+                      bookPageController.saveBook(itens, true)
+                    }else{
+                      bookPageController.criarDoc(itens, readAfter: true)
+                    }
+                    
+                  }, icon: Icon(Icons.save)),
+                  IconButton(onPressed: () => {
+                    if(bookPageController.isReadingbook(itens)){
+                      bookPageController.doneBook(itens, true)
+                    }else{
+                      bookPageController.criarDoc(itens, readed: true)
+                    }
+                  }, icon: Icon(Icons.done)),
+                  IconButton(onPressed: () => {
+                    if(bookPageController.isReadingbook(itens)){
+                      bookPageController.updateFavorites(itens, true)
+                    }else{
+                      bookPageController.criarDoc(itens, isFavorite: true)
+                    }
+                  }, icon: Icon(Icons.favorite)),
                 ],
               )
             ],

@@ -65,3 +65,7 @@ Future<String?> registerInFirebase() async {
     }
   }
 }
+
+LocalUser getLocalUser() {
+  return localUser;
+}

@@ -39,8 +39,12 @@ Future<String?> signInFirebase() async {
     } else if (error.toString() ==
         '[firebase_auth/user-not-found] There is no user record corresponding to this identifier. The user may have been deleted.') {
       return 'Email não cadastrado';
-    }else{
+    } else {
       return error.toString();
     }
   }
+}
+
+LocalUser getLocalUser() {
+  return localUser;
 }
