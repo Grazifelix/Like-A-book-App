@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:likeabook_app/src/view/book_page_view.dart';
 import 'package:likeabook_app/src/view/home_page_view.dart';
+import 'package:likeabook_app/src/view/initial_preferences_view.dart';
 import 'package:likeabook_app/src/view/login_page_view.dart';
 import 'package:likeabook_app/src/view/profile_page_view.dart';
 import 'package:likeabook_app/src/view/register_page_view.dart';
@@ -44,6 +45,7 @@ class MyApp extends StatelessWidget {
         ProfilePage.routeName: (context) => const ProfilePage(),
         BookPage.routeName: (context) => const BookPage(),
         ProfileSettingsPage.routeName: (context) => const ProfileSettingsPage(),
+        InitialPreferences.routeName: (contex) => const InitialPreferences(),
       },
     );
   }
