@@ -14,7 +14,6 @@ RepositoryItens repository = RepositoryItens();
 class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
-    final localUser = ModalRoute.of(context)!.settings.arguments;
     return Scaffold(
       appBar: AppBar(
         flexibleSpace: Container(
@@ -34,7 +33,7 @@ class _ProfilePageState extends State<ProfilePage> {
           Row(
             children: <Widget>[
               IconButton(
-                onPressed: () => Navigator.pushNamed(context, '/settings', arguments: localUser),
+                onPressed: () => Navigator.pushNamed(context, '/settings'),
                 icon: const Icon(Icons.settings),
                 tooltip: "Configurações",
               )

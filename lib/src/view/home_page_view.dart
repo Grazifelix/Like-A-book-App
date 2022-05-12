@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:likeabook_app/src/itemsTestClass.dart';
-import 'package:likeabook_app/src/model/user_model.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -15,7 +14,6 @@ RepositoryItens repository = RepositoryItens();
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    final localUser = ModalRoute.of(context)!.settings.arguments;
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -41,7 +39,7 @@ class _HomePageState extends State<HomePage> {
           Row(
             children: <Widget>[
               IconButton(
-                onPressed: () => {Navigator.pushNamed(context, '/profile', arguments: localUser)},
+                onPressed: () => {Navigator.pushNamed(context, '/profile')},
                 icon: const Icon(Icons.person),
                 tooltip: "Profile",
               )

@@ -19,7 +19,6 @@ class _ProfileSettingsPageState extends State<ProfileSettingsPage> {
 
   @override
   Widget build(BuildContext context) {
-    final localUser = ModalRoute.of(context)!.settings.arguments as LocalUser;
     ProfileControl profileControl = ProfileControl(localUser);
     return Scaffold(
       appBar: AppBar(
@@ -76,7 +75,7 @@ class _ProfileSettingsPageState extends State<ProfileSettingsPage> {
                     ),
                   ),
                   const Text(
-                    'Modo Aleatorio',
+                    'Modo Personalizado',
                     style:
                         TextStyle(fontSize: 18.0, fontWeight: FontWeight.w100),
                   ),
@@ -99,7 +98,7 @@ class _ProfileSettingsPageState extends State<ProfileSettingsPage> {
                     ),
                   ),
                   const Text(
-                    'Modo Aleatorio',
+                    'Modo Aleatório',
                     style:
                         TextStyle(fontSize: 18.0, fontWeight: FontWeight.w100),
                   ),
