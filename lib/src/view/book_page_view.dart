@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:likeabook_app/src/itemsTestClass.dart';
+import 'package:likeabook_app/src/controller/book_page_controller.dart';
 
 class BookPage extends StatefulWidget {
   const BookPage({Key? key}) : super(key: key);
@@ -9,7 +10,7 @@ class BookPage extends StatefulWidget {
   State<BookPage> createState() => _BookPage();
 }
 
-RepositoryItens repository = new RepositoryItens();
+RepositoryItens repository = RepositoryItens();
 
 class _BookPage extends State<BookPage> {
   @override
@@ -64,9 +65,40 @@ class _BookPage extends State<BookPage> {
               Column(
                 //criar funções para os butões
                 children: [
-                  IconButton(onPressed: () => {}, icon: Icon(Icons.save)),
-                  IconButton(onPressed: () => {}, icon: Icon(Icons.done)),
-                  IconButton(onPressed: () => {}, icon: Icon(Icons.favorite)),
+                  IconButton(
+                    onPressed: () {
+                      saveBook(itens);
+                      setState(() {});
+                    },
+                    icon: isSavedBook(itens)
+                        ? const Icon(
+                            Icons.save,
+                            color: Colors.deepPurple,
+                          )
+                        : const Icon(
+                            Icons.save,
+                            color: Colors.black,
+                          ),
+                  ),
+                  IconButton(
+                      onPressed: () {
+                        doneBook(itens);
+                        setState(() {});
+                      },
+                      icon: isReadBook(itens)
+                          ? const Icon(
+                              Icons.done_all,
+                              color: Colors.blue,
+                            )
+                          : const Icon(Icons.done)),
+                  IconButton(
+                      onPressed: () {
+                        favoriteBook(itens);
+                        setState(() {});
+                      },
+                      icon: isFavoriteBook(itens)
+                          ? const Icon(Icons.favorite, color: Colors.red)
+                          : const Icon(Icons.favorite)),
                 ],
               )
             ],

@@ -75,8 +75,13 @@ class _HomePageState extends State<HomePage> {
               child: InkWell(
                   hoverColor: const Color.fromARGB(86, 96, 79, 126),
                   splashColor: const Color.fromARGB(86, 96, 79, 126),
-                  onTap: () =>
-                      {Navigator.pushNamed(context, '/book', arguments: item)}),
+                  onTap: () => {
+                        Navigator.pushNamed(
+                          context,
+                          '/book',
+                          arguments: item,
+                        )
+                      }),
             ),
           ),
           Container(

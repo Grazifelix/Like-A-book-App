@@ -20,3 +20,5 @@ class LocalUser {
     _password = '';
   }
 }
+
+LocalUser localUser = LocalUser();

@@ -1,5 +1,5 @@
 class Book {
-  int bookId = 0;
+  String bookId = '';
   String name = '';
   String description = '';
   String author = '';
