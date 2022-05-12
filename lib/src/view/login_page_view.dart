@@ -108,7 +108,7 @@ class _LoginHomePageState extends State<LoginHomePage> {
                   if (_formkey.currentState!.validate()) {
                     var resultError = await signInFirebase();
                     if (resultError == null) {
-                      Navigator.popAndPushNamed(context, '/home', arguments: getLocalUser());
+                      Navigator.popAndPushNamed(context, '/home');
                     } else {
                       setState(() => error = resultError);
                       ScaffoldMessenger.of(context)

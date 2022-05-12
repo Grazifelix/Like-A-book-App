@@ -13,3 +13,5 @@ class LocalUser {
   set setName(String name) => _name = name;
   set setUserId(String uid) => _userId = uid;
 }
+
+LocalUser localUser = LocalUser();

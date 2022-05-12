@@ -2,8 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:likeabook_app/src/model/user_model.dart';
 
-LocalUser localUser = LocalUser();
-
 String? validateEmail(String email) {
   bool isValid = EmailValidator.validate(email);
   if (!isValid) {
@@ -45,6 +43,3 @@ Future<String?> signInFirebase() async {
   }
 }
 
-LocalUser getLocalUser() {
-  return localUser;
-}

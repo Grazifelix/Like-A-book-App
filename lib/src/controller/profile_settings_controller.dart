@@ -1,5 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:likeabook_app/src/controller/login_page_controller.dart';
+import 'package:likeabook_app/src/model/user_model.dart';
 
 String? validateName(String name) {
   if (name.isEmpty) {

@@ -156,7 +156,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   if (_formKey.currentState!.validate()) {
                     var resultError = await registerInFirebase();
                     if (resultError == null) {
-                      Navigator.popAndPushNamed(context, '/home',  arguments: getLocalUser());
+                      Navigator.popAndPushNamed(context, '/home');
                     } else {
                       setState(() => error = resultError);
                       ScaffoldMessenger.of(context)

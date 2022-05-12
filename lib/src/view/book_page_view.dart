@@ -15,10 +15,7 @@ RepositoryItens repository = RepositoryItens();
 class _BookPage extends State<BookPage> {
   @override
   Widget build(BuildContext context) {
-    final argumentsList = ModalRoute.of(context)!.settings.arguments as List;
-    CardProfileItem itens = argumentsList[0];
-    var localUser = argumentsList[1];
-    BookPageController bookPageController = BookPageController(localUser);
+    final itens = ModalRoute.of(context)!.settings.arguments as CardProfileItem;
     return Scaffold(
       appBar: AppBar(
         flexibleSpace: Container(
@@ -68,28 +65,34 @@ class _BookPage extends State<BookPage> {
               Column(
                 //criar funções para os butões
                 children: [
-                  IconButton(onPressed: () => {
-                    if(bookPageController.isReadingbook(itens)){
-                      bookPageController.saveBook(itens, true)
-                    }else{
-                      bookPageController.criarDoc(itens, readAfter: true)
-                    }
-                    
-                  }, icon: Icon(Icons.save)),
-                  IconButton(onPressed: () => {
-                    if(bookPageController.isReadingbook(itens)){
-                      bookPageController.doneBook(itens, true)
-                    }else{
-                      bookPageController.criarDoc(itens, readed: true)
-                    }
-                  }, icon: Icon(Icons.done)),
-                  IconButton(onPressed: () => {
-                    if(bookPageController.isReadingbook(itens)){
-                      bookPageController.updateFavorites(itens, true)
-                    }else{
-                      bookPageController.criarDoc(itens, isFavorite: true)
-                    }
-                  }, icon: Icon(Icons.favorite)),
+                  IconButton(
+                    onPressed: () => setState(() {
+                      saveBook(itens);
+                    }),
+                    icon: isSavedBook(itens)
+                        ? const Icon(
+                            Icons.save,
+                            color: Colors.deepPurple,
+                          )
+                        : const Icon(
+                            Icons.save,
+                            color: Colors.black,
+                          ),
+                  ),
+                  IconButton(
+                      onPressed: () => setState(() {
+                            doneBook(itens);
+                          }),
+                      icon: isReadBook(itens)
+                          ? const Icon(Icons.done_all, color: Colors.blue,)
+                          : const Icon(Icons.done)),
+                  IconButton(
+                      onPressed: () => setState(() {
+                            favoriteBook(itens);
+                          }),
+                      icon: isFavoriteBook(itens)
+                          ? const Icon(Icons.favorite, color: Colors.red)
+                          :const Icon(Icons.favorite)),
                 ],
               )
             ],

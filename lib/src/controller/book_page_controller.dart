@@ -3,66 +3,85 @@ import 'package:likeabook_app/src/model/reading_model.dart';
 import 'package:likeabook_app/src/model/user_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class BookPageController {
-  LocalUser localUser;
-  List<Reading> readingsBooks = [];
-  late CollectionReference collection;
-  BookPageController(this.localUser) {
-    iniciarColletion();
-  }
+CollectionReference collection =
+    FirebaseFirestore.instance.collection(localUser.getUserId);
 
-  void iniciarColletion() async {
-    collection = FirebaseFirestore.instance.collection(localUser.getUserId);
-    var result = await collection.get();
+bool isReadingBook(CardProfileItem book) {
+  return readingBooks.any((element) => element.getBookId == book.title);
+}
 
-    for (var doc in result.docs) {
-      readingsBooks.add(
-          Reading(doc.id, doc['isFavorite'], doc['readAfter'], doc['readed']));
-    }
-  }
+Reading searchBook(CardProfileItem book) {
+  return readingBooks.firstWhere((element) => element.getBookId == book.title);
+}
 
-  void criarDoc(CardProfileItem book,
-      {bool isFavorite = false,
-      bool readAfter = false,
-      bool readed = false}) async {
-    print('criou');
-    await collection.doc(book.title).set(
-      {
-        'isFavorite': isFavorite,
-        'readAfter': readAfter,
-        'readed': readed,
-      },
-    );
-    readingsBooks.add(Reading(book.title, isFavorite, readAfter, readed));
-  }
-
-  void updateFavorites(CardProfileItem book, bool isFavorite) async {
-    print('atualizou');
-    await collection.doc(book.title).update({'isFavorite': isFavorite});
-    readingsBooks
-        .firstWhere((element) => element.bookId == book.title)
-        .isFavorite = isFavorite;
-  }
-
-  void saveBook(CardProfileItem book, bool save) async{
-    await collection.doc(book.title).update({'readAfter': save});
-    readingsBooks
-        .firstWhere((element) => element.bookId == book.title)
-        .isFavorite = save;
-  }
-
-  void doneBook(CardProfileItem book, bool done) async{
-    await collection.doc(book.title).update({'readed': done});
-    readingsBooks
-        .firstWhere((element) => element.bookId == book.title)
-        .isFavorite = done;
-  }
-
-
-  bool isReadingbook(CardProfileItem book) {
-    if (readingsBooks.any((element) => element.bookId == book.title)) {
-      return true;
-    }
+bool isSavedBook(CardProfileItem book) {
+  if (isReadingBook(book)) {
+    return searchBook(book).getIsReadAfter;
+  } else {
     return false;
   }
+}
+
+bool isReadBook(CardProfileItem book) {
+  if (isReadingBook(book)) {
+    return searchBook(book).getIsReaded;
+  } else {
+    return false;
+  }
+}
+
+bool isFavoriteBook(CardProfileItem book) {
+  if (isReadingBook(book)) {
+    return searchBook(book).getIsFavorite;
+  } else {
+    return false;
+  }
+}
+
+void saveBook(CardProfileItem book) async {
+  if (isReadingBook(book)) {
+    var result = searchBook(book);
+    result.toggleReadAfter();
+    await collection
+        .doc(book.title)
+        .update({'readAfter': result.getIsReadAfter});
+  } else {
+    createReadingBook(book, readAfter: true);
+  }
+}
+
+void favoriteBook(CardProfileItem book) async {
+  if (isReadingBook(book)) {
+    var result = searchBook(book);
+    result.toggleIsFavorite();
+    await collection
+        .doc(book.title)
+        .update({'isFavorite': result.getIsFavorite});
+  } else {
+    createReadingBook(book, isFavorite: true);
+  }
+}
+
+void doneBook(CardProfileItem book) async {
+  if (isReadingBook(book)) {
+    var result = searchBook(book);
+    result.toggleReaded();
+    await collection.doc(book.title).update({'readed': result.getIsReaded});
+  } else {
+    createReadingBook(book, readed: true);
+  }
+}
+
+void createReadingBook(CardProfileItem book,
+    {bool isFavorite = false,
+    bool readAfter = false,
+    bool readed = false}) async {
+  await collection.doc(book.title).set(
+    {
+      'isFavorite': isFavorite,
+      'readAfter': readAfter,
+      'readed': readed,
+    },
+  );
+  readingBooks.add(Reading(book.title, isFavorite, readAfter, readed));
 }
