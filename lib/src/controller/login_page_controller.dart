@@ -42,4 +42,3 @@ Future<String?> signInFirebase() async {
     }
   }
 }
-
