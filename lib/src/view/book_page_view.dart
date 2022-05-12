@@ -66,9 +66,10 @@ class _BookPage extends State<BookPage> {
                 //criar funções para os butões
                 children: [
                   IconButton(
-                    onPressed: () => setState(() {
+                    onPressed: () {
                       saveBook(itens);
-                    }),
+                      setState(() {});
+                    },
                     icon: isSavedBook(itens)
                         ? const Icon(
                             Icons.save,
@@ -80,19 +81,24 @@ class _BookPage extends State<BookPage> {
                           ),
                   ),
                   IconButton(
-                      onPressed: () => setState(() {
-                            doneBook(itens);
-                          }),
+                      onPressed: () {
+                        doneBook(itens);
+                        setState(() {});
+                      },
                       icon: isReadBook(itens)
-                          ? const Icon(Icons.done_all, color: Colors.blue,)
+                          ? const Icon(
+                              Icons.done_all,
+                              color: Colors.blue,
+                            )
                           : const Icon(Icons.done)),
                   IconButton(
-                      onPressed: () => setState(() {
-                            favoriteBook(itens);
-                          }),
+                      onPressed: () {
+                        favoriteBook(itens);
+                        setState(() {});
+                      },
                       icon: isFavoriteBook(itens)
                           ? const Icon(Icons.favorite, color: Colors.red)
-                          :const Icon(Icons.favorite)),
+                          : const Icon(Icons.favorite)),
                 ],
               )
             ],
