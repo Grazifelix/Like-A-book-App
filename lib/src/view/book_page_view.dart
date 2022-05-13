@@ -170,93 +170,91 @@ class _BookPage extends State<BookPage> {
 //de livros semelhantes ao livro clicado
   Widget buildCards({required CardProfileItem item}) => SizedBox(
         width: 111,
-        child: Column(children: [
-          Expanded(
-            child: Material(
-              child: Ink.image(
-                image: NetworkImage(item.urlImage),
-                fit: BoxFit.cover,
-                child: InkWell(
-                  hoverColor: const Color.fromARGB(86, 96, 79, 126),
-                  splashColor: const Color.fromARGB(86, 96, 79, 126),
-                  onTap: () =>
-                      {Navigator.pushNamed(context, '/book', arguments: item)},
+        child: Column(
+          children: [
+            Expanded(
+              child: Material(
+                child: Ink.image(
+                  image: NetworkImage(item.urlImage),
+                  fit: BoxFit.cover,
+                  child: InkWell(
+                    hoverColor: const Color.fromARGB(86, 96, 79, 126),
+                    splashColor: const Color.fromARGB(86, 96, 79, 126),
+                    onTap: () => {
+                      Navigator.pushNamed(context, '/book', arguments: item)
+                    },
+                  ),
                 ),
               ),
             ),
-          ),
-        ]),
+          ],
+        ),
       );
 
   Widget ratingPopUp(CardProfileItem book) {
-    return AlertDialog(
-      title: const Text('Como você avalia sua leitura?'),
-      actions: [
-        Row(
-          children: [
-            IconButton(
-              onPressed: () {
-                ratingBook(book, 1);
-                setState(() {});
-              },
-              icon: activeStar(book, 1)
-                  ? const Icon(
-                      Icons.star,
-                      color: Color.fromARGB(255, 100, 85, 207),
-                    )
-                  : const Icon(Icons.star_border),
-            ),
-            IconButton(
-              onPressed: () {
-                ratingBook(book, 2);
-                setState(() {});
-              },
-              icon: activeStar(book, 2)
-                  ? const Icon(
-                      Icons.star,
-                      color: Color.fromARGB(255, 100, 85, 207),
-                    )
-                  : const Icon(Icons.star_border),
-            ),
-            IconButton(
-              onPressed: () {
-                ratingBook(book, 3);
-                setState(() {});
-              },
-              icon: activeStar(book, 3)
-                  ? const Icon(
-                      Icons.star,
-                      color: Color.fromARGB(255, 100, 85, 207),
-                    )
-                  : const Icon(Icons.star_border),
-            ),
-            IconButton(
-              onPressed: () {
-                ratingBook(book, 4);
-                setState(() {});
-              },
-              icon: activeStar(book, 4)
-                  ? const Icon(
-                      Icons.star,
-                      color: Color.fromARGB(255, 100, 85, 207),
-                    )
-                  : const Icon(Icons.star_border),
-            ),
-            IconButton(
-              onPressed: () {
-                ratingBook(book, 5);
-                setState(() {});
-              },
-              icon: activeStar(book, 5)
-                  ? const Icon(
-                      Icons.star,
-                      color: Color.fromARGB(255, 100, 85, 207),
-                    )
-                  : const Icon(Icons.star_border),
-            ),
+    double? iconsize = 36;
+    return StatefulBuilder(
+      builder: (context, setState) {
+        return AlertDialog(
+          title: const Text('Como você avalia sua leitura?'),
+          actions: [
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                IconButton(
+                  onPressed: () {
+                    ratingBook(book, 1);
+                    setState(() {});
+                  },
+                  icon: starDesing(book, 1),
+                  iconSize: iconsize,
+                ),
+                IconButton(
+                  onPressed: () {
+                    ratingBook(book, 2);
+                    setState(() {});
+                  },
+                  icon: starDesing(book, 2),
+                  iconSize: iconsize,
+                ),
+                IconButton(
+                  onPressed: () {
+                    ratingBook(book, 3);
+                    setState(() {});
+                  },
+                  icon: starDesing(book, 3),
+                  iconSize: iconsize,
+                ),
+                IconButton(
+                  onPressed: () {
+                    ratingBook(book, 4);
+                    setState(() {});
+                  },
+                  icon: starDesing(book, 4),
+                  iconSize: iconsize,
+                ),
+                IconButton(
+                  onPressed: () {
+                    ratingBook(book, 5);
+                    setState(() {});
+                  },
+                  icon: starDesing(book, 5),
+                  iconSize: iconsize,
+                ),
+              ],
+            )
           ],
-        )
-      ],
+        );
+      },
     );
+  }
+
+  Widget starDesing(CardProfileItem book, int starValue) {
+    return activeStar(book, starValue)
+        ? const Icon(
+            Icons.star,
+            color: Color.fromARGB(255, 100, 85, 207),
+          )
+        : const Icon(Icons.star_border);
   }
 }
