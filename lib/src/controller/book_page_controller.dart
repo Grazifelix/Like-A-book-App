@@ -22,7 +22,7 @@ bool isSavedBook(CardProfileItem book) {
   }
 }
 
-bool isReadBook(CardProfileItem book) {
+bool isReadedBook(CardProfileItem book) {
   if (isReadingBook(book)) {
     return searchBook(book).getIsReaded;
   } else {
@@ -72,16 +72,44 @@ void doneBook(CardProfileItem book) async {
   }
 }
 
-void createReadingBook(CardProfileItem book,
-    {bool isFavorite = false,
-    bool readAfter = false,
-    bool readed = false}) async {
+void createReadingBook(
+  CardProfileItem book, {
+  int? rating,
+  bool isFavorite = false,
+  bool readAfter = false,
+  bool readed = false,
+}) async {
   await collection.doc(book.title).set(
     {
+      'rating': rating,
       'isFavorite': isFavorite,
       'readAfter': readAfter,
       'readed': readed,
     },
   );
-  readingBooks.add(Reading(book.title, isFavorite, readAfter, readed));
+  Reading reading = Reading(book.title, isFavorite, readAfter, readed);
+  reading.setRating = rating;
+  readingBooks.add(reading);
+}
+
+void ratingBook(CardProfileItem book, int rating) {
+  if (isReadingBook(book)) {
+    var result = searchBook(book);
+    result.setRating = rating;
+    collection.doc(book.title).update({'rating': result.getRating});
+  } else {
+    createReadingBook(book, readed: true, rating: rating);
+  }
+}
+
+bool activeStar(CardProfileItem book, int starValue) {
+  if (isReadingBook(book)) {
+    if (starValue <= searchBook(book).getRating!) {
+      return true;
+    } else {
+      return false;
+    }
+  } else {
+    return false;
+  }
 }

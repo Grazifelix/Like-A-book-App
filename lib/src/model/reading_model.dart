@@ -1,5 +1,6 @@
 class Reading {
   final String _bookId;
+  int? _rating;
   bool _isFavorite;
   bool _readAfter;
   bool _readed;
@@ -9,6 +10,15 @@ class Reading {
   bool get getIsFavorite => _isFavorite;
   bool get getIsReadAfter => _readAfter;
   bool get getIsReaded => _readed;
+  int? get getRating => _rating;
+
+  set setRating(int? value) {
+    if (value! >= 1 && value <= 5) {
+      _rating = value;
+    } else {
+      _rating = null;
+    }
+  }
 
   void toggleIsFavorite() => _isFavorite = !_isFavorite;
   void toggleReadAfter() => _readAfter = !_readAfter;

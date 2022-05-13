@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:likeabook_app/src/itemsTestClass.dart';
+import 'package:likeabook_app/src/controller/home_page_controller.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -12,6 +13,12 @@ class HomePage extends StatefulWidget {
 RepositoryItens repository = RepositoryItens();
 
 class _HomePageState extends State<HomePage> {
+  @override
+  void initState() {
+    initUserCollection();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

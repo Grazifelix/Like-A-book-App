@@ -82,10 +82,17 @@ class _BookPage extends State<BookPage> {
                   ),
                   IconButton(
                       onPressed: () {
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return ratingPopUp(itens);
+                          },
+                        );
                         doneBook(itens);
+
                         setState(() {});
                       },
-                      icon: isReadBook(itens)
+                      icon: isReadedBook(itens)
                           ? const Icon(
                               Icons.done_all,
                               color: Colors.blue,
@@ -179,4 +186,76 @@ class _BookPage extends State<BookPage> {
           ),
         ]),
       );
+
+  Widget ratingPopUp(CardProfileItem book) {
+    return AlertDialog(
+      title: const Text('Como você avalia sua leitura?'),
+      actions: [
+        Row(
+          children: [
+            IconButton(
+              onPressed: () {
+                ratingBook(book, 1);
+                setState(() {});
+              },
+              icon: activeStar(book, 1)
+                  ? const Icon(
+                      Icons.star,
+                      color: Color.fromARGB(255, 100, 85, 207),
+                    )
+                  : const Icon(Icons.star_border),
+            ),
+            IconButton(
+              onPressed: () {
+                ratingBook(book, 2);
+                setState(() {});
+              },
+              icon: activeStar(book, 2)
+                  ? const Icon(
+                      Icons.star,
+                      color: Color.fromARGB(255, 100, 85, 207),
+                    )
+                  : const Icon(Icons.star_border),
+            ),
+            IconButton(
+              onPressed: () {
+                ratingBook(book, 3);
+                setState(() {});
+              },
+              icon: activeStar(book, 3)
+                  ? const Icon(
+                      Icons.star,
+                      color: Color.fromARGB(255, 100, 85, 207),
+                    )
+                  : const Icon(Icons.star_border),
+            ),
+            IconButton(
+              onPressed: () {
+                ratingBook(book, 4);
+                setState(() {});
+              },
+              icon: activeStar(book, 4)
+                  ? const Icon(
+                      Icons.star,
+                      color: Color.fromARGB(255, 100, 85, 207),
+                    )
+                  : const Icon(Icons.star_border),
+            ),
+            IconButton(
+              onPressed: () {
+                ratingBook(book, 5);
+                setState(() {});
+              },
+              icon: activeStar(book, 5)
+                  ? const Icon(
+                      Icons.star,
+                      color: Color.fromARGB(255, 100, 85, 207),
+                    )
+                  : const Icon(Icons.star_border),
+            ),
+          ],
+        )
+      ],
+    );
+  }
 }
