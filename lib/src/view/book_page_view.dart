@@ -82,14 +82,15 @@ class _BookPage extends State<BookPage> {
                   ),
                   IconButton(
                       onPressed: () {
-                        showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return ratingPopUp(itens);
-                          },
-                        );
+                        if (!isReadedBook(itens)) {
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return ratingPopUp(itens);
+                            },
+                          );
+                        }
                         doneBook(itens);
-
                         setState(() {});
                       },
                       icon: isReadedBook(itens)
