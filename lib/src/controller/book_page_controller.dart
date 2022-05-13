@@ -42,9 +42,15 @@ void saveBook(CardProfileItem book) async {
   if (isReadingBook(book)) {
     var result = searchBook(book);
     result.toggleReadAfter();
-    await collection
-        .doc(book.title)
-        .update({'readAfter': result.getIsReadAfter});
+    if (result.isAllFalse()) {
+      cleanDatabase(result);
+    } else {
+      await collection.doc(book.title).update(
+        {
+          'readAfter': result.getIsReadAfter,
+        },
+      );
+    }
   } else {
     createReadingBook(book, readAfter: true);
   }
@@ -54,9 +60,13 @@ void favoriteBook(CardProfileItem book) async {
   if (isReadingBook(book)) {
     var result = searchBook(book);
     result.toggleIsFavorite();
-    await collection
-        .doc(book.title)
-        .update({'isFavorite': result.getIsFavorite});
+    if (result.isAllFalse()) {
+      cleanDatabase(result);
+    } else {
+      await collection
+          .doc(book.title)
+          .update({'isFavorite': result.getIsFavorite});
+    }
   } else {
     createReadingBook(book, isFavorite: true);
   }
@@ -66,7 +76,11 @@ void doneBook(CardProfileItem book) async {
   if (isReadingBook(book)) {
     var result = searchBook(book);
     result.toggleReaded();
-    await collection.doc(book.title).update({'readed': result.getIsReaded});
+    if (result.isAllFalse()) {
+      cleanDatabase(result);
+    } else {
+      await collection.doc(book.title).update({'readed': result.getIsReaded});
+    }
   } else {
     createReadingBook(book, readed: true);
   }
@@ -112,4 +126,9 @@ bool activeStar(CardProfileItem book, int starValue) {
   } else {
     return false;
   }
+}
+
+void cleanDatabase(Reading book) {
+  readingBooks.remove(book);
+  collection.doc(book.getBookId).delete();
 }

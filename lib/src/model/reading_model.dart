@@ -20,6 +20,14 @@ class Reading {
     }
   }
 
+  bool isAllFalse() {
+    if (!_isFavorite && !_readAfter && !_readed) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   void toggleIsFavorite() => _isFavorite = !_isFavorite;
   void toggleReadAfter() => _readAfter = !_readAfter;
   void toggleReaded() => _readed = !_readed;
