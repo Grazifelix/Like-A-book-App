@@ -82,7 +82,9 @@ class _BookPage extends State<BookPage> {
                   ),
                   IconButton(
                       onPressed: () {
-                        if (!isReadedBook(itens)) {
+                        doneBook(itens);
+                        setState(() {});
+                        if (isReadedBook(itens)) {
                           showDialog(
                             context: context,
                             builder: (BuildContext context) {
@@ -90,8 +92,6 @@ class _BookPage extends State<BookPage> {
                             },
                           );
                         }
-                        doneBook(itens);
-                        setState(() {});
                       },
                       icon: isReadedBook(itens)
                           ? const Icon(
