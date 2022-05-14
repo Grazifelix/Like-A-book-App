@@ -122,15 +122,23 @@ void ratingBook(CardProfileItem book, int starValue) {
   }
 }
 
-bool activeStar(CardProfileItem book, int starValue) {
-  if (isReadingBook(book)) {
-    if (starValue <= searchBook(book).getRating) {
-      return true;
+bool activeStar(CardProfileItem book, int starValue, bool userRating) {
+  if (userRating) {
+    if (isReadingBook(book)) {
+      if (starValue <= searchBook(book).getRating) {
+        return true;
+      } else {
+        return false;
+      }
     } else {
       return false;
     }
   } else {
-    return false;
+    if (starValue <= book.rating) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }
 

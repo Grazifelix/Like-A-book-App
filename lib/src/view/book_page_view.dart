@@ -117,16 +117,12 @@ class _BookPage extends State<BookPage> {
             style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w200),
           )),
           //esquema de mostragem de estrelas: precisa criar uma função para isso
-          Row(mainAxisAlignment: MainAxisAlignment.center, children: const [
-            Icon(
-              Icons.star,
-              color: Color.fromARGB(255, 99, 85, 207),
-              size: 34,
-            ),
-            Icon(Icons.star, color: Color.fromARGB(255, 99, 85, 207), size: 34),
-            Icon(Icons.star, color: Color.fromARGB(255, 99, 85, 207), size: 34),
-            Icon(Icons.star, color: Color.fromARGB(255, 99, 85, 207), size: 34),
-            Icon(Icons.star, color: Color.fromARGB(255, 99, 85, 207), size: 34),
+          Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+            starDesing(itens, 1, false),
+            starDesing(itens, 2, false),
+            starDesing(itens, 3, false),
+            starDesing(itens, 4, false),
+            starDesing(itens, 5, false),
           ]),
           const Divider(
             height: 3.0,
@@ -181,7 +177,7 @@ class _BookPage extends State<BookPage> {
                     hoverColor: const Color.fromARGB(86, 96, 79, 126),
                     splashColor: const Color.fromARGB(86, 96, 79, 126),
                     onTap: () => {
-                      Navigator.pushNamed(context, '/book', arguments: item)
+                      Navigator.popAndPushNamed(context, '/book', arguments: item)
                     },
                   ),
                 ),
@@ -192,7 +188,6 @@ class _BookPage extends State<BookPage> {
       );
 
   Widget ratingPopUp(CardProfileItem book) {
-    double? iconsize = 36;
     return StatefulBuilder(
       builder: (context, setState) {
         return AlertDialog(
@@ -206,40 +201,35 @@ class _BookPage extends State<BookPage> {
                     ratingBook(book, 1);
                     setState(() {});
                   },
-                  icon: starDesing(book, 1),
-                  iconSize: iconsize,
+                  icon: starDesing(book, 1, true),
                 ),
                 IconButton(
                   onPressed: () {
                     ratingBook(book, 2);
                     setState(() {});
                   },
-                  icon: starDesing(book, 2),
-                  iconSize: iconsize,
+                  icon: starDesing(book, 2, true),
                 ),
                 IconButton(
                   onPressed: () {
                     ratingBook(book, 3);
                     setState(() {});
                   },
-                  icon: starDesing(book, 3),
-                  iconSize: iconsize,
+                  icon: starDesing(book, 3, true),
                 ),
                 IconButton(
                   onPressed: () {
                     ratingBook(book, 4);
                     setState(() {});
                   },
-                  icon: starDesing(book, 4),
-                  iconSize: iconsize,
+                  icon: starDesing(book, 4, true),
                 ),
                 IconButton(
                   onPressed: () {
                     ratingBook(book, 5);
                     setState(() {});
                   },
-                  icon: starDesing(book, 5),
-                  iconSize: iconsize,
+                  icon: starDesing(book, 5, true),
                 ),
               ],
             )
@@ -249,12 +239,16 @@ class _BookPage extends State<BookPage> {
     );
   }
 
-  Widget starDesing(CardProfileItem book, int starValue) {
-    return activeStar(book, starValue)
+  Widget starDesing(CardProfileItem book, int starValue, bool userRating) {
+    return activeStar(book, starValue, userRating)
         ? const Icon(
             Icons.star,
             color: Color.fromARGB(255, 100, 85, 207),
+            size: 36,
           )
-        : const Icon(Icons.star_border);
+        : const Icon(
+            Icons.star_border,
+            size: 36,
+          );
   }
 }
