@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:likeabook_app/src/controller/profile_page_controller.dart';
 import 'package:likeabook_app/src/itemsTestClass.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -47,9 +48,9 @@ class _ProfilePageState extends State<ProfilePage> {
           //Books already read
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: const [
-              Text("Livros Lidos"),
-              Text('2'),
+            children: [
+              const Text("Livros Lidos"),
+              Text('${countReadedBooks()}'),
               /*this will be a number count of the user read books*/
             ],
           ),
@@ -67,12 +68,12 @@ class _ProfilePageState extends State<ProfilePage> {
             child: ListView.separated(
               scrollDirection: Axis.horizontal,
               padding: const EdgeInsets.only(top: 15.0),
-              itemCount: repository.getItens().length,
+              itemCount: countReadedBooks(),
               separatorBuilder: (context, _) => const SizedBox(
                 width: 12.0,
               ),
               itemBuilder: (context, index) =>
-                  buildCards(item: repository.getItens()[index]),
+                  buildCards(item: getReadedBooks(index)),
             ),
           ),
 
@@ -82,9 +83,9 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: const [
-              Text("Ler mais tarde"),
-              Text('2'),
+            children: [
+              const Text("Ler mais tarde"),
+              Text('${countSavedBooks()}'),
               /*this will be a number count of the user read books*/
             ],
           ),
@@ -102,12 +103,12 @@ class _ProfilePageState extends State<ProfilePage> {
             child: ListView.separated(
               scrollDirection: Axis.horizontal,
               padding: const EdgeInsets.only(top: 15.0),
-              itemCount: repository.getItens().length,
+              itemCount: countSavedBooks(),
               separatorBuilder: (context, _) => const SizedBox(
                 width: 12.0,
               ),
               itemBuilder: (context, index) =>
-                  buildCards(item: repository.getItens()[index]),
+                  buildCards(item: getSavedBooks(index)),
             ),
           ),
         ],
