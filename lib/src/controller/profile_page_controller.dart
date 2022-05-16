@@ -3,26 +3,36 @@ import 'package:likeabook_app/src/model/reading_model.dart';
 
 RepositoryItens repository = RepositoryItens();
 
-int countReadedBooks(){
-  return readingBooks.where((element) => element.getIsReaded == true).toList().length;
+List bookIdReadeds = [];
+List bookIdSaveds = [];
+
+void loadLists() {
+  bookIdReadeds = readingBooks
+      .where((element) => element.getIsReaded == true)
+      .map((e) => e.getBookId)
+      .toList();
+  bookIdSaveds = readingBooks
+      .where((element) => element.getIsReadAfter == true)
+      .map((e) => e.getBookId)
+      .toList();
+}
+
+int countReadedBooks() {
+  return bookIdReadeds.length;
 }
 
 getReadedBooks(int index) {
-  List<Reading> listaLidos =
-      readingBooks.where((element) => element.getIsReaded == true).toList();
-
   return repository
-      .getItens().firstWhere((element) => element.title == listaLidos[index].getBookId);
+      .getItens()
+      .firstWhere((element) => element.title == bookIdReadeds[index]);
 }
 
-int countSavedBooks(){
-  return readingBooks.where((element) => element.getIsReadAfter == true).toList().length;
+int countSavedBooks() {
+  return bookIdSaveds.length;
 }
 
 getSavedBooks(int index) {
-  List<Reading> listaLidos =
-      readingBooks.where((element) => element.getIsReadAfter == true).toList();
-
   return repository
-      .getItens().firstWhere((element) => element.title == listaLidos[index].getBookId);
+      .getItens()
+      .firstWhere((element) => element.title == bookIdSaveds[index]);
 }

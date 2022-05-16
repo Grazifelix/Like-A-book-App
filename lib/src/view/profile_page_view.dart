@@ -14,6 +14,12 @@ RepositoryItens repository = RepositoryItens();
 
 class _ProfilePageState extends State<ProfilePage> {
   @override
+  void initState() {
+    loadLists();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -73,7 +79,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 width: 12.0,
               ),
               itemBuilder: (context, index) =>
-                  buildCards(item: getReadedBooks(index)),
+                  buildCards(item: getReadedBooks(index), isDone: true),
             ),
           ),
 
@@ -116,7 +122,7 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
-  Widget buildCards({required CardProfileItem item}) => SizedBox(
+  Widget buildCards({required CardProfileItem item, bool isDone = false}) => SizedBox(
         width: 111,
         child: Column(children: [
           Expanded(
@@ -136,13 +142,13 @@ class _ProfilePageState extends State<ProfilePage> {
           const SizedBox(
             height: 5,
           ),
-          favorite(item.favorite)
+          favorite(item.favorite, isDone)
         ]),
       );
 
-  Widget favorite(bool favorite) {
+  Widget favorite(bool favorite, bool isDone) {
     return Icon(
-      favorite ? Icons.favorite : null,
+      favorite && isDone ? Icons.favorite : null,
       color: favorite ? const Color.fromARGB(255, 99, 85, 207) : null,
     );
   }
