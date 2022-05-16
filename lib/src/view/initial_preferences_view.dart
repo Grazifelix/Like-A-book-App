@@ -104,7 +104,9 @@ class _InitialPreferences extends State<InitialPreferences> {
             //textbutton
             Flexible(
               child: TextButton(
-                  onPressed: () => {},
+                  onPressed: () => {
+                        Navigator.pushNamed(context, '/home'),
+                      },
                   child: const Text(
                     'Pular',
                     style: TextStyle(
@@ -141,7 +143,7 @@ class _InitialPreferences extends State<InitialPreferences> {
         child: Transform.scale(
           scale: 5.0,
           child: Checkbox(
-            activeColor: Color.fromARGB(0, 99, 85, 207),
+            activeColor: Color.fromARGB(160, 99, 85, 207),
             shape: const CircleBorder(side: BorderSide.none),
             value: clicked,
             onChanged: (value) => setState(
