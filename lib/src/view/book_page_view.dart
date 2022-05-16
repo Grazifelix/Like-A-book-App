@@ -128,7 +128,11 @@ class _BookPage extends State<BookPage> {
             height: 3.0,
             thickness: 1.0,
           ),
+          const SizedBox(
+            height: 30,
+          ),
           Center(child: Text(itens.description)),
+          const SizedBox(height: 30),
           const Divider(
             height: 3.0,
             thickness: 1.0,
@@ -177,7 +181,8 @@ class _BookPage extends State<BookPage> {
                     hoverColor: const Color.fromARGB(86, 96, 79, 126),
                     splashColor: const Color.fromARGB(86, 96, 79, 126),
                     onTap: () => {
-                      Navigator.popAndPushNamed(context, '/book', arguments: item)
+                      Navigator.popAndPushNamed(context, '/book',
+                          arguments: item)
                     },
                   ),
                 ),
@@ -191,9 +196,14 @@ class _BookPage extends State<BookPage> {
     return StatefulBuilder(
       builder: (context, setState) {
         return AlertDialog(
-          title: const Text('Como você avalia sua leitura?'),
+          title: const Text(
+            'Como você avalia sua leitura?',
+            style: TextStyle(fontWeight: FontWeight.w100, fontSize: 25),
+          ),
+          actionsAlignment: MainAxisAlignment.center,
           actions: [
             Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 IconButton(
@@ -232,7 +242,20 @@ class _BookPage extends State<BookPage> {
                   icon: starDesing(book, 5, true),
                 ),
               ],
-            )
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: const Text(
+                  'Ok',
+                  textAlign: TextAlign.right,
+                  style: TextStyle(
+                      color: Color.fromARGB(255, 99, 85, 207), fontSize: 20),
+                ))
           ],
         );
       },
