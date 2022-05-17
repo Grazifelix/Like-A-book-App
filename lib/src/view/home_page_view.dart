@@ -89,42 +89,97 @@ class _HomePageState extends State<HomePage> {
                       }),
             ),
           ),
-          Container(
-            padding: const EdgeInsets.all(10.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                //há um problema de overflow do texto (texto ultrapassando limites da tela) para concertar depois
-                Text(
-                  item.title,
-                  style: TextStyle(fontSize: 25, fontWeight: FontWeight.w100),
-                ),
-                const SizedBox(height: 15),
-                Text(
-                  item.autor,
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w300),
-                ),
-                //classifição dos livros: criar uma função de mostragem de estrelas
-
-                Row(children: const [
-                  Icon(
-                    Icons.star,
-                    color: Color.fromARGB(255, 99, 85, 207),
-                    size: 34,
+          Expanded(
+            child: Container(
+              padding: const EdgeInsets.all(10.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    item.title,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(
+                        fontSize: 25, fontWeight: FontWeight.w100),
                   ),
-                  Icon(Icons.star,
-                      color: Color.fromARGB(255, 99, 85, 207), size: 34),
-                  Icon(Icons.star,
-                      color: Color.fromARGB(255, 99, 85, 207), size: 34),
-                  Icon(Icons.star,
-                      color: Color.fromARGB(255, 99, 85, 207), size: 34),
-                  Icon(Icons.star,
-                      color: Color.fromARGB(255, 99, 85, 207), size: 34),
-                ])
-              ],
+                  const SizedBox(height: 15),
+                  Text(
+                    item.autor,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(
+                        fontSize: 20, fontWeight: FontWeight.w300),
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  stars(item.rating),
+                ],
+              ),
             ),
           ),
         ]),
       );
+
+  Widget stars(int rating) {
+    switch (rating) {
+      case 1:
+        return const Icon(
+          Icons.star,
+          color: Color.fromARGB(255, 99, 85, 207),
+          size: 34,
+        );
+      case 2:
+        return Row(children: const [
+          Icon(
+            Icons.star,
+            color: Color.fromARGB(255, 99, 85, 207),
+            size: 34,
+          ),
+          Icon(Icons.star, color: Color.fromARGB(255, 99, 85, 207), size: 34)
+        ]);
+      case 3:
+        return SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(children: const [
+            Icon(
+              Icons.star,
+              color: Color.fromARGB(255, 99, 85, 207),
+              size: 34,
+            ),
+            Icon(Icons.star, color: Color.fromARGB(255, 99, 85, 207), size: 34),
+            Icon(Icons.star, color: Color.fromARGB(255, 99, 85, 207), size: 34)
+          ]),
+        );
+      case 4:
+        return SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(children: const [
+            Icon(
+              Icons.star,
+              color: Color.fromARGB(255, 99, 85, 207),
+              size: 34,
+            ),
+            Icon(Icons.star, color: Color.fromARGB(255, 99, 85, 207), size: 34),
+            Icon(Icons.star, color: Color.fromARGB(255, 99, 85, 207), size: 34),
+            Icon(Icons.star, color: Color.fromARGB(255, 99, 85, 207), size: 34)
+          ]),
+        );
+      case 5:
+        return SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(children: const [
+            Icon(
+              Icons.star,
+              color: Color.fromARGB(255, 99, 85, 207),
+              size: 34,
+            ),
+            Icon(Icons.star, color: Color.fromARGB(255, 99, 85, 207), size: 34),
+            Icon(Icons.star, color: Color.fromARGB(255, 99, 85, 207), size: 34),
+            Icon(Icons.star, color: Color.fromARGB(255, 99, 85, 207), size: 34),
+            Icon(Icons.star, color: Color.fromARGB(255, 99, 85, 207), size: 34)
+          ]),
+        );
+    }
+    throw '';
+  }
 }
