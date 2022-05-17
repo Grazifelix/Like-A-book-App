@@ -142,7 +142,7 @@ class _ProfilePageState extends State<ProfilePage> {
           const SizedBox(
             height: 5,
           ),
-          favorite(item.favorite, isDone)
+          favorite(isFavorite(item), isDone)
         ]),
       );
 

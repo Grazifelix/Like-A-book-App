@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:likeabook_app/src/itemsTestClass.dart';
 import 'package:likeabook_app/src/model/reading_model.dart';
 
@@ -5,6 +6,7 @@ RepositoryItens repository = RepositoryItens();
 
 List bookIdReadeds = [];
 List bookIdSaveds = [];
+List favoritesbooks = [];
 
 void loadLists() {
   bookIdReadeds = readingBooks
@@ -13,6 +15,10 @@ void loadLists() {
       .toList();
   bookIdSaveds = readingBooks
       .where((element) => element.getIsReadAfter == true)
+      .map((e) => e.getBookId)
+      .toList();
+  favoritesbooks = readingBooks
+      .where((element) => element.getIsFavorite == true)
       .map((e) => e.getBookId)
       .toList();
 }
@@ -35,4 +41,12 @@ getSavedBooks(int index) {
   return repository
       .getItens()
       .firstWhere((element) => element.title == bookIdSaveds[index]);
+}
+
+isFavorite(CardProfileItem book) {
+  if (favoritesbooks.contains(book.title)) {
+    return true;
+  } else {
+    return false;
+  }
 }
