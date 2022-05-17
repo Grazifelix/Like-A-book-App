@@ -38,14 +38,14 @@ bool isFavoriteBook(CardProfileItem book) {
   }
 }
 
-void saveBook(CardProfileItem book) async {
+void saveBook(CardProfileItem book) {
   if (isReadingBook(book)) {
     var result = searchBook(book);
     result.toggleReadAfter();
     if (result.isAllFalse()) {
       cleanDatabase(result);
     } else {
-      await collection.doc(book.title).update(
+      collection.doc(book.title).update(
         {
           'readAfter': result.getIsReadAfter,
         },
@@ -56,14 +56,14 @@ void saveBook(CardProfileItem book) async {
   }
 }
 
-void favoriteBook(CardProfileItem book) async {
+void favoriteBook(CardProfileItem book) {
   if (isReadingBook(book)) {
     var result = searchBook(book);
     result.toggleIsFavorite();
     if (result.isAllFalse()) {
       cleanDatabase(result);
     } else {
-      await collection.doc(book.title).update(
+      collection.doc(book.title).update(
         {
           'isFavorite': result.getIsFavorite,
         },
@@ -74,14 +74,14 @@ void favoriteBook(CardProfileItem book) async {
   }
 }
 
-void doneBook(CardProfileItem book) async {
+void doneBook(CardProfileItem book){
   if (isReadingBook(book)) {
     var result = searchBook(book);
     result.toggleReaded();
     if (result.isAllFalse()) {
       cleanDatabase(result);
     } else {
-      await collection.doc(book.title).update(
+      collection.doc(book.title).update(
         {
           'readed': result.getIsReaded,
         },
@@ -98,8 +98,8 @@ void createReadingBook(
   bool isFavorite = false,
   bool readAfter = false,
   bool readed = false,
-}) async {
-  await collection.doc(book.title).set(
+}){
+  collection.doc(book.title).set(
     {
       'rating': rating,
       'isFavorite': isFavorite,
