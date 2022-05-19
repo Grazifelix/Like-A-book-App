@@ -43,9 +43,9 @@ class _InitialPreferences extends State<InitialPreferences> {
                     mainAxisSpacing: 10,
                     childAspectRatio: 0.7,
                   ),
-                  itemCount: repository.getItens().length,
+                  itemCount: repository.getRegister().length,
                   itemBuilder: (context, index) =>
-                      bookSelection(item: repository.getItens()[index])),
+                      bookSelection(item: repository.getRegister()[index])),
             ),
             const SizedBox(
               height: 50,
@@ -62,7 +62,9 @@ class _InitialPreferences extends State<InitialPreferences> {
                   borderRadius: const BorderRadius.all(
                     Radius.circular(30),
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.pushNamed(context, '/home');
+                  },
                   child: Ink(
                     height: 54,
                     width: double.maxFinite,

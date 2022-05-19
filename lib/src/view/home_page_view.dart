@@ -56,13 +56,13 @@ class _HomePageState extends State<HomePage> {
       ),
       body: ListView.separated(
         padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
-        itemCount: repository.getItens().length,
+        itemCount: repository.getHome().length,
         separatorBuilder: (context, _) => const Divider(
           height: 3.0,
           thickness: 1.0,
         ),
         itemBuilder: (context, index) =>
-            cardBook(item: repository.getItens()[index]),
+            cardBook(item: repository.getHome()[index]),
       ),
     );
   }

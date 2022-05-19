@@ -148,12 +148,12 @@ class _BookPage extends State<BookPage> {
             child: ListView.separated(
               scrollDirection: Axis.horizontal,
               padding: const EdgeInsets.only(top: 15.0),
-              itemCount: repository.getItens().length,
+              itemCount: repository.getHome().length,
               separatorBuilder: (context, _) => const SizedBox(
                 width: 12.0,
               ),
               itemBuilder: (context, index) =>
-                  buildCards(item: repository.getItens()[index]),
+                  buildCards(item: repository.getHome()[index]),
             ),
           ),
 

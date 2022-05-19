@@ -14,7 +14,7 @@ class _ProfileSettingsPageState extends State<ProfileSettingsPage> {
   final _nameFormKey = GlobalKey<FormState>();
   final _emailFormKey = GlobalKey<FormState>();
   final _passwordFormKey = GlobalKey<FormState>();
-  bool check1 = false;
+  bool check1 = true;
   bool check2 = false;
 
   @override

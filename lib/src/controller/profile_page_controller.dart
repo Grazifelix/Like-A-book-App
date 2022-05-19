@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:likeabook_app/src/itemsTestClass.dart';
 import 'package:likeabook_app/src/model/reading_model.dart';
 
@@ -29,7 +28,7 @@ int countReadedBooks() {
 
 getReadedBooks(int index) {
   return repository
-      .getItens()
+      .getHome()
       .firstWhere((element) => element.title == bookIdReadeds[index]);
 }
 
@@ -39,7 +38,7 @@ int countSavedBooks() {
 
 getSavedBooks(int index) {
   return repository
-      .getItens()
+      .getHome()
       .firstWhere((element) => element.title == bookIdSaveds[index]);
 }
 
