@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:likeabook_app/src/itemsTestClass.dart';
 import 'package:likeabook_app/src/controller/book_page_controller.dart';
+import 'package:likeabook_app/src/model/book_model.dart';
 
 class BookPage extends StatefulWidget {
   const BookPage({Key? key}) : super(key: key);
@@ -15,7 +16,7 @@ RepositoryItens repository = RepositoryItens();
 class _BookPage extends State<BookPage> {
   @override
   Widget build(BuildContext context) {
-    final itens = ModalRoute.of(context)!.settings.arguments as CardProfileItem;
+    final itens = ModalRoute.of(context)!.settings.arguments as Book;
     return Scaffold(
       appBar: AppBar(
         flexibleSpace: Container(
@@ -48,7 +49,7 @@ class _BookPage extends State<BookPage> {
         children: [
           Center(
               child: Text(
-            itens.title,
+            itens.getTitle,
             style: const TextStyle(fontSize: 25, fontWeight: FontWeight.w100),
           )),
           const SizedBox(
@@ -61,7 +62,7 @@ class _BookPage extends State<BookPage> {
                   alignment: Alignment.centerRight,
                   width: 200,
                   height: 231,
-                  child: Image.network(itens.urlImage)),
+                  child: Image.network(itens.getUrlImage)),
               Column(
                 //criar funções para os butões
                 children: [
@@ -113,7 +114,7 @@ class _BookPage extends State<BookPage> {
           ),
           Center(
               child: Text(
-            itens.autor,
+            itens.getAuthor,
             style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w200),
           )),
           //esquema de mostragem de estrelas: precisa criar uma função para isso
@@ -131,7 +132,7 @@ class _BookPage extends State<BookPage> {
           const SizedBox(
             height: 30,
           ),
-          Center(child: Text(itens.description)),
+          Center(child: Text(itens.getDescription)),
           const SizedBox(height: 30),
           const Divider(
             height: 3.0,
@@ -192,7 +193,7 @@ class _BookPage extends State<BookPage> {
         ),
       );
 
-  Widget ratingPopUp(CardProfileItem book) {
+  Widget ratingPopUp(Book book) {
     return StatefulBuilder(
       builder: (context, setState) {
         return AlertDialog(
@@ -243,7 +244,7 @@ class _BookPage extends State<BookPage> {
                 ),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             TextButton(
@@ -262,7 +263,7 @@ class _BookPage extends State<BookPage> {
     );
   }
 
-  Widget starDesing(CardProfileItem book, int starValue, bool userRating) {
+  Widget starDesing(Book book, int starValue, bool userRating) {
     return activeStar(book, starValue, userRating)
         ? const Icon(
             Icons.star,

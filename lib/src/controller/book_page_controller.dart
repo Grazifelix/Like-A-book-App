@@ -1,4 +1,4 @@
-import 'package:likeabook_app/src/itemsTestClass.dart';
+import 'package:likeabook_app/src/model/book_model.dart';
 import 'package:likeabook_app/src/model/reading_model.dart';
 import 'package:likeabook_app/src/model/user_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -6,15 +6,16 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 CollectionReference collection =
     FirebaseFirestore.instance.collection(localUser.getUserId);
 
-bool isReadingBook(CardProfileItem book) {
-  return readingBooks.any((element) => element.getBookId == book.title);
+bool isReadingBook(Book book) {
+  return readingBooks.any((element) => element.getBookId == book.getTitle);
 }
 
-Reading searchBook(CardProfileItem book) {
-  return readingBooks.firstWhere((element) => element.getBookId == book.title);
+Reading searchBook(Book book) {
+  return readingBooks
+      .firstWhere((element) => element.getBookId == book.getTitle);
 }
 
-bool isSavedBook(CardProfileItem book) {
+bool isSavedBook(Book book) {
   if (isReadingBook(book)) {
     return searchBook(book).getIsReadAfter;
   } else {
@@ -22,7 +23,7 @@ bool isSavedBook(CardProfileItem book) {
   }
 }
 
-bool isReadedBook(CardProfileItem book) {
+bool isReadedBook(Book book) {
   if (isReadingBook(book)) {
     return searchBook(book).getIsReaded;
   } else {
@@ -30,7 +31,7 @@ bool isReadedBook(CardProfileItem book) {
   }
 }
 
-bool isFavoriteBook(CardProfileItem book) {
+bool isFavoriteBook(Book book) {
   if (isReadingBook(book)) {
     return searchBook(book).getIsFavorite;
   } else {
@@ -38,14 +39,14 @@ bool isFavoriteBook(CardProfileItem book) {
   }
 }
 
-void saveBook(CardProfileItem book) {
+void saveBook(Book book) {
   if (isReadingBook(book)) {
     var result = searchBook(book);
     result.toggleReadAfter();
     if (result.isAllFalse()) {
       cleanDatabase(result);
     } else {
-      collection.doc(book.title).update(
+      collection.doc(book.getTitle).update(
         {
           'readAfter': result.getIsReadAfter,
         },
@@ -56,14 +57,14 @@ void saveBook(CardProfileItem book) {
   }
 }
 
-void favoriteBook(CardProfileItem book) {
+void favoriteBook(Book book) {
   if (isReadingBook(book)) {
     var result = searchBook(book);
     result.toggleIsFavorite();
     if (result.isAllFalse()) {
       cleanDatabase(result);
     } else {
-      collection.doc(book.title).update(
+      collection.doc(book.getTitle).update(
         {
           'isFavorite': result.getIsFavorite,
         },
@@ -74,14 +75,14 @@ void favoriteBook(CardProfileItem book) {
   }
 }
 
-void doneBook(CardProfileItem book){
+void doneBook(Book book) {
   if (isReadingBook(book)) {
     var result = searchBook(book);
     result.toggleReaded();
     if (result.isAllFalse()) {
       cleanDatabase(result);
     } else {
-      collection.doc(book.title).update(
+      collection.doc(book.getTitle).update(
         {
           'readed': result.getIsReaded,
         },
@@ -93,13 +94,13 @@ void doneBook(CardProfileItem book){
 }
 
 void createReadingBook(
-  CardProfileItem book, {
+  Book book, {
   int rating = -1,
   bool isFavorite = false,
   bool readAfter = false,
   bool readed = false,
-}){
-  collection.doc(book.title).set(
+}) {
+  collection.doc(book.getTitle).set(
     {
       'rating': rating,
       'isFavorite': isFavorite,
@@ -107,22 +108,22 @@ void createReadingBook(
       'readed': readed,
     },
   );
-  Reading reading = Reading(book.title, isFavorite, readAfter, readed);
+  Reading reading = Reading(book.getTitle, isFavorite, readAfter, readed);
   reading.setRating = rating;
   readingBooks.add(reading);
 }
 
-void ratingBook(CardProfileItem book, int starValue) {
+void ratingBook(Book book, int starValue) {
   if (isReadingBook(book)) {
     var result = searchBook(book);
     result.setRating = starValue;
-    collection.doc(book.title).update({'rating': result.getRating});
+    collection.doc(book.getTitle).update({'rating': result.getRating});
   } else {
     createReadingBook(book, readed: true, rating: starValue);
   }
 }
 
-bool activeStar(CardProfileItem book, int starValue, bool userRating) {
+bool activeStar(Book book, int starValue, bool userRating) {
   if (userRating) {
     if (isReadingBook(book)) {
       if (starValue <= searchBook(book).getRating) {
@@ -134,7 +135,7 @@ bool activeStar(CardProfileItem book, int starValue, bool userRating) {
       return false;
     }
   } else {
-    if (starValue <= book.rating) {
+    if (starValue <= double.parse(book.getRating).truncate()) {
       return true;
     } else {
       return false;
