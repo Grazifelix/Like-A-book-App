@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:likeabook_app/src/controller/initial_controller.dart';
 import 'package:likeabook_app/src/itemsTestClass.dart';
+import 'package:likeabook_app/src/model/book_model.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class InitialPreferences extends StatefulWidget {
   const InitialPreferences({Key? key}) : super(key: key);
@@ -11,23 +15,80 @@ class InitialPreferences extends StatefulWidget {
 
 RepositoryItens repository = RepositoryItens();
 
+class Test {
+  String test = '';
+  Test(this.test);
+}
+
 class _InitialPreferences extends State<InitialPreferences> {
   final List selectBooks =
       []; //essa lista será utilizada pelo algoritmo de recomendação
   bool check2 = false;
+  String test = '';
+  String test2 = '';
+  List<Test> tst = [];
+  var url = Uri.parse("http://127.0.0.1:5000/test");
+
+  @override
+  void initState() {
+    getData();
+    super.initState();
+  }
+
+  Future getData() async {
+    final response = await http.get(url);
+    final decode = jsonDecode(response.body);
+    for (var n in decode.values) {
+      Test t = Test(n);
+      print(t);
+      tst.add(t);
+      print(tst);
+    }
+    // for (var n in decode.values) {
+    //   print(n);
+    // }
+    if (response.statusCode == 200) {
+      setState(() {
+        // test = decode['num'];
+        // test2 = decode['num2'];
+        test = tst[0].test;
+        test2 = tst[1].test;
+      });
+      // setState(() {
+      //   for (var n in decode) {
+      //     Test nn = Test(n['num'], n['num2']);
+      //     tst.add(nn);
+      //   }
+      //   if (tst.length == null) {
+      //     print('Lista vazia');
+      //   } else {
+      //     print(tst.length);
+      //   }
+
+      //   // test = tst[0].toString();
+      //   // print(tst[0].toString());
+      //   // test2 = tst[1].toString();
+      // });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
+    //print(books);
+
     return Scaffold(
       body: Container(
         padding: const EdgeInsets.symmetric(horizontal: 80.0, vertical: 20.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text(
-              'Selecione os livros que voce já leu:',
-              style: TextStyle(fontSize: 25, fontWeight: FontWeight.w100),
-            ),
+            Text(test),
+            Text(test2),
+            // Text(
+            //   test,
+            //   // 'Selecione os livros que voce já leu:',
+            //   style: TextStyle(fontSize: 25, fontWeight: FontWeight.w100),
+            // ),
             const SizedBox(
               height: 30,
             ),
