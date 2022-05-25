@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:likeabook_app/src/itemsTestClass.dart';
 import 'package:likeabook_app/src/controller/home_page_controller.dart';
+import 'package:likeabook_app/src/model/book_model.dart';
+
+import "package:http/http.dart" as http;
+import 'dart:convert';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -54,26 +58,35 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-      body: ListView.separated(
-        padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
-        itemCount: repository.getItens().length,
-        separatorBuilder: (context, _) => const Divider(
-          height: 3.0,
-          thickness: 1.0,
-        ),
-        itemBuilder: (context, index) =>
-            cardBook(item: repository.getItens()[index]),
+      body: FutureBuilder(
+        future: getBooks(),
+        builder: (context, AsyncSnapshot snapshot) {
+          if (snapshot.data == null) {
+            return const Center(child: Text('loading...'));
+          } else {
+            return ListView.separated(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
+              itemCount: snapshot.data.length,
+              separatorBuilder: (context, _) => const Divider(
+                height: 3.0,
+                thickness: 1.0,
+              ),
+              itemBuilder: (context, index) => cardBook(item: books[index]),
+            );
+          }
+        },
       ),
     );
   }
 
-  Widget cardBook({required CardProfileItem item}) => Container(
+  Widget cardBook({required Book item}) => Container(
         padding: const EdgeInsets.symmetric(vertical: 15.0),
         height: 200,
         child: Row(children: [
           Material(
             child: Ink.image(
-              image: NetworkImage(item.urlImage),
+              image: NetworkImage(item.getUrlImage),
               fit: BoxFit.cover,
               width: 125,
               height: 181,
@@ -97,14 +110,14 @@ class _HomePageState extends State<HomePage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(
-                    item.title,
+                    item.getTitle,
                     overflow: TextOverflow.ellipsis,
                     style: const TextStyle(
                         fontSize: 25, fontWeight: FontWeight.w100),
                   ),
                   const SizedBox(height: 15),
                   Text(
-                    item.autor,
+                    item.getAuthor,
                     overflow: TextOverflow.ellipsis,
                     style: const TextStyle(
                         fontSize: 20, fontWeight: FontWeight.w300),
@@ -112,7 +125,7 @@ class _HomePageState extends State<HomePage> {
                   const SizedBox(
                     height: 15,
                   ),
-                  stars(item.rating),
+                  stars(double.parse(item.getRating).truncate()),
                 ],
               ),
             ),

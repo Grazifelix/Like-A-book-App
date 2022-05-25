@@ -1,8 +1,8 @@
 class Book {
   String _urlImage = '';
-  String _bookId;
+  String _bookId = '';
   String _title = '';
-  int _rating = 0;
+  String _rating = '';
   String _description = '';
   String _author = '';
 
@@ -13,7 +13,7 @@ class Book {
   String get getBookId => _bookId;
   String get getTitle => _title;
   String get getAuthor => _author;
-  int get getRating => _rating;
+  String get getRating => _rating;
   String get getDescription => _description;
 }
 

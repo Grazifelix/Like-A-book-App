@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:likeabook_app/src/pageTest.dart';
 import 'package:likeabook_app/src/view/book_page_view.dart';
 import 'package:likeabook_app/src/view/home_page_view.dart';
 import 'package:likeabook_app/src/view/initial_preferences_view.dart';
@@ -47,7 +46,6 @@ class MyApp extends StatelessWidget {
         BookPage.routeName: (context) => const BookPage(),
         ProfileSettingsPage.routeName: (context) => const ProfileSettingsPage(),
         InitialPreferences.routeName: (contex) => const InitialPreferences(),
-        testPage.routeName: (contex) => const testPage(),
       },
     );
   }

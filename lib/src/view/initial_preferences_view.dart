@@ -17,8 +17,7 @@ RepositoryItens repository = RepositoryItens();
 
 class Test {
   String test = '';
-  String test2 = '';
-  Test(this.test, this.test2);
+  Test(this.test);
 }
 
 class _InitialPreferences extends State<InitialPreferences> {
@@ -39,29 +38,37 @@ class _InitialPreferences extends State<InitialPreferences> {
   Future getData() async {
     final response = await http.get(url);
     final decode = jsonDecode(response.body);
+    for (var n in decode.values) {
+      Test t = Test(n);
+      print(t);
+      tst.add(t);
+      print(tst);
+    }
     // for (var n in decode.values) {
-    //   Test t = Test(n['num'], n['num2']);
-    //   tst.add(t);
-    //   print(tst);
+    //   print(n);
     // }
     if (response.statusCode == 200) {
       setState(() {
-        for (var n in decode) {
-          Test nn = Test(n['num'], n['num2']);
-          tst.add(nn);
-        }
-        if (tst.length == null) {
-          print('Lista vazia');
-        } else {
-          print(tst.length);
-        }
-
-        test = decode['num'];
-        test2 = decode['num2'];
-        // test = tst[0].toString();
-        // print(tst[0].toString());
-        // test2 = tst[1].toString();
+        // test = decode['num'];
+        // test2 = decode['num2'];
+        test = tst[0].test;
+        test2 = tst[1].test;
       });
+      // setState(() {
+      //   for (var n in decode) {
+      //     Test nn = Test(n['num'], n['num2']);
+      //     tst.add(nn);
+      //   }
+      //   if (tst.length == null) {
+      //     print('Lista vazia');
+      //   } else {
+      //     print(tst.length);
+      //   }
+
+      //   // test = tst[0].toString();
+      //   // print(tst[0].toString());
+      //   // test2 = tst[1].toString();
+      // });
     }
   }
 
