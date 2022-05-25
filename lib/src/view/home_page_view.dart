@@ -3,9 +3,6 @@ import 'package:likeabook_app/src/itemsTestClass.dart';
 import 'package:likeabook_app/src/controller/home_page_controller.dart';
 import 'package:likeabook_app/src/model/book_model.dart';
 
-import "package:http/http.dart" as http;
-import 'dart:convert';
-
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
   static const routeName = '/home';
@@ -13,8 +10,6 @@ class HomePage extends StatefulWidget {
   @override
   State<HomePage> createState() => _HomePageState();
 }
-
-RepositoryItens repository = RepositoryItens();
 
 class _HomePageState extends State<HomePage> {
   @override
@@ -58,7 +53,6 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-
       body: FutureBuilder(
         future: getBooks(),
         builder: (context, AsyncSnapshot snapshot) {
