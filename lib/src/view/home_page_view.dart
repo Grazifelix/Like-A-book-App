@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:likeabook_app/src/itemsTestClass.dart';
 import 'package:likeabook_app/src/controller/home_page_controller.dart';
 import 'package:likeabook_app/src/model/book_model.dart';
 
@@ -23,11 +22,6 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        leading: IconButton(
-          onPressed: () => {},
-          icon: const Icon(Icons.search_rounded),
-          tooltip: "Searching",
-        ),
         flexibleSpace: Container(
             decoration: const BoxDecoration(
                 gradient: LinearGradient(

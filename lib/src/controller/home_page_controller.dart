@@ -44,7 +44,7 @@ Future getBooks() async {
     for (var n in decode['books']) {
       books.add(
         Book(defautLivroUrl, n['book_id'], n['titulo'], n['autor'],
-            n['descricao'], n['rating']),
+            n['descricao'], n['rating'], n['cluster_id']),
       );
     }
   }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:likeabook_app/src/controller/profile_page_controller.dart';
-import 'package:likeabook_app/src/itemsTestClass.dart';
+import 'package:likeabook_app/src/model/book_model.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -9,8 +9,6 @@ class ProfilePage extends StatefulWidget {
   @override
   State<ProfilePage> createState() => _ProfilePageState();
 }
-
-RepositoryItens repository = RepositoryItens();
 
 class _ProfilePageState extends State<ProfilePage> {
   @override
@@ -122,13 +120,13 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
-  Widget buildCards({required CardProfileItem item, bool isDone = false}) => SizedBox(
+  Widget buildCards({required Book item, bool isDone = false}) => SizedBox(
         width: 111,
         child: Column(children: [
           Expanded(
             child: Material(
               child: Ink.image(
-                image: NetworkImage(item.urlImage),
+                image: NetworkImage(item.getUrlImage),
                 fit: BoxFit.cover,
                 child: InkWell(
                   hoverColor: const Color.fromARGB(86, 96, 79, 126),

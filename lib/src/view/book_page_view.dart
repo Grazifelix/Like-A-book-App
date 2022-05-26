@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:likeabook_app/src/itemsTestClass.dart';
 import 'package:likeabook_app/src/controller/book_page_controller.dart';
 import 'package:likeabook_app/src/model/book_model.dart';
 
@@ -10,8 +9,6 @@ class BookPage extends StatefulWidget {
   @override
   State<BookPage> createState() => _BookPage();
 }
-
-RepositoryItens repository = RepositoryItens();
 
 class _BookPage extends State<BookPage> {
   @override
@@ -149,12 +146,12 @@ class _BookPage extends State<BookPage> {
             child: ListView.separated(
               scrollDirection: Axis.horizontal,
               padding: const EdgeInsets.only(top: 15.0),
-              itemCount: repository.getHome().length,
+              itemCount: books.length,
               separatorBuilder: (context, _) => const SizedBox(
                 width: 12.0,
               ),
               itemBuilder: (context, index) =>
-                  buildCards(item: repository.getHome()[index]),
+                  buildCards(item: books[index]),
             ),
           ),
 
@@ -169,14 +166,14 @@ class _BookPage extends State<BookPage> {
 
 //Este card build esta recebendo itens do repositório, mas no futuro será do algoritmo de recomendação
 //de livros semelhantes ao livro clicado
-  Widget buildCards({required CardProfileItem item}) => SizedBox(
+  Widget buildCards({required Book item}) => SizedBox(
         width: 111,
         child: Column(
           children: [
             Expanded(
               child: Material(
                 child: Ink.image(
-                  image: NetworkImage(item.urlImage),
+                  image: NetworkImage(item.getUrlImage),
                   fit: BoxFit.cover,
                   child: InkWell(
                     hoverColor: const Color.fromARGB(86, 96, 79, 126),

@@ -1,7 +1,5 @@
-import 'package:likeabook_app/src/itemsTestClass.dart';
 import 'package:likeabook_app/src/model/reading_model.dart';
-
-RepositoryItens repository = RepositoryItens();
+import 'package:likeabook_app/src/model/book_model.dart';
 
 List bookIdReadeds = [];
 List bookIdSaveds = [];
@@ -27,9 +25,8 @@ int countReadedBooks() {
 }
 
 getReadedBooks(int index) {
-  return repository
-      .getHome()
-      .firstWhere((element) => element.title == bookIdReadeds[index]);
+  return books
+      .firstWhere((element) => element.getBookId == bookIdReadeds[index]);
 }
 
 int countSavedBooks() {
@@ -37,13 +34,12 @@ int countSavedBooks() {
 }
 
 getSavedBooks(int index) {
-  return repository
-      .getHome()
-      .firstWhere((element) => element.title == bookIdSaveds[index]);
+  return books
+      .firstWhere((element) => element.getBookId == bookIdSaveds[index]);
 }
 
-isFavorite(CardProfileItem book) {
-  if (favoritesbooks.contains(book.title)) {
+isFavorite(Book book) {
+  if (favoritesbooks.contains(book.getBookId)) {
     return true;
   } else {
     return false;
