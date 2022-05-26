@@ -71,6 +71,7 @@ class _LoginHomePageState extends State<LoginHomePage> {
                   ),
                   TextFormField(
                     keyboardType: TextInputType.visiblePassword,
+                    obscureText: true,
                     validator: (value) => validatePassword(value!),
                     decoration: const InputDecoration(
                       enabledBorder: UnderlineInputBorder(

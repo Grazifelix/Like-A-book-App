@@ -1,6 +1,8 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:likeabook_app/src/model/book_model.dart';
+import 'package:likeabook_app/src/model/reading_model.dart';
 import 'package:likeabook_app/src/model/user_model.dart';
 
 String newPassword = '';
@@ -67,13 +69,16 @@ void updatePassword(String password) {
 void logout() async {
   await FirebaseAuth.instance.signOut();
   localUser.singOut();
+  userBooks = [];
+  books = [];
+  readingBooks = [];
 }
 
 bool isRandomMode() {
   return localUser.getUserMode;
 }
 
-void updateMode(bool mode){
+void updateMode(bool mode) {
   localUser.setIsRandomMode = mode;
   FirebaseFirestore.instance.collection(localUser.getUserId).doc('mode').update(
     {'random': mode},

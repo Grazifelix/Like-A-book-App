@@ -95,6 +95,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   //Input Senha
                   TextFormField(
                     keyboardType: TextInputType.visiblePassword,
+                    obscureText: true,
                     validator: (password) => validatePassword(password!),
                     decoration: const InputDecoration(
                       enabledBorder: UnderlineInputBorder(
@@ -119,6 +120,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   ),
                   TextFormField(
                     keyboardType: TextInputType.visiblePassword,
+                    obscureText: true,
                     validator: (password2) => confirmPassword(password2!),
                     decoration: const InputDecoration(
                       enabledBorder: UnderlineInputBorder(

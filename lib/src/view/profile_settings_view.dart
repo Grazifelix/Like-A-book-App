@@ -235,6 +235,7 @@ class _ProfileSettingsPageState extends State<ProfileSettingsPage> {
                             children: [
                               TextFormField(
                                 keyboardType: TextInputType.visiblePassword,
+                                obscureText: true,
                                 decoration: const InputDecoration(
                                     labelText: "Nova senha"),
                                 validator: (value) =>
@@ -243,6 +244,7 @@ class _ProfileSettingsPageState extends State<ProfileSettingsPage> {
                               ),
                               TextFormField(
                                 keyboardType: TextInputType.visiblePassword,
+                                obscureText: true,
                                 decoration: const InputDecoration(
                                     labelText: "Confirmar Nova senha"),
                                 validator: (value) =>
