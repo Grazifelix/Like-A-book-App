@@ -125,17 +125,22 @@ class _ProfilePageState extends State<ProfilePage> {
         child: Column(children: [
           Expanded(
             child: Material(
-              child: Ink.image(
-                image: NetworkImage(item.getUrlImage),
-                fit: BoxFit.cover,
-                child: InkWell(
-                  hoverColor: const Color.fromARGB(86, 96, 79, 126),
-                  splashColor: const Color.fromARGB(86, 96, 79, 126),
-                  onTap: () =>
-                      {Navigator.pushNamed(context, '/book', arguments: item)},
+                child: Stack(alignment: Alignment.center,
+              children: [
+                Text(item.getTitle),
+                Ink.image(
+                  image: NetworkImage(item.getUrlImage),
+                  fit: BoxFit.cover,
+                  child: InkWell(
+                    hoverColor: const Color.fromARGB(86, 96, 79, 126),
+                    splashColor: const Color.fromARGB(86, 96, 79, 126),
+                    onTap: () => {
+                      Navigator.pushNamed(context, '/book', arguments: item)
+                    },
+                  ),
                 ),
-              ),
-            ),
+              ],
+            )),
           ),
           const SizedBox(
             height: 5,

@@ -150,8 +150,7 @@ class _BookPage extends State<BookPage> {
               separatorBuilder: (context, _) => const SizedBox(
                 width: 12.0,
               ),
-              itemBuilder: (context, index) =>
-                  buildCards(item: books[index]),
+              itemBuilder: (context, index) => buildCards(item: books[index]),
             ),
           ),
 
@@ -172,19 +171,24 @@ class _BookPage extends State<BookPage> {
           children: [
             Expanded(
               child: Material(
-                child: Ink.image(
-                  image: NetworkImage(item.getUrlImage),
-                  fit: BoxFit.cover,
-                  child: InkWell(
-                    hoverColor: const Color.fromARGB(86, 96, 79, 126),
-                    splashColor: const Color.fromARGB(86, 96, 79, 126),
-                    onTap: () => {
-                      Navigator.popAndPushNamed(context, '/book',
-                          arguments: item)
-                    },
+                  child: Stack(
+                alignment: Alignment.center,
+                children: [
+                  Text(item.getTitle),
+                  Ink.image(
+                    image: NetworkImage(item.getUrlImage),
+                    fit: BoxFit.cover,
+                    child: InkWell(
+                      hoverColor: const Color.fromARGB(86, 96, 79, 126),
+                      splashColor: const Color.fromARGB(86, 96, 79, 126),
+                      onTap: () => {
+                        Navigator.popAndPushNamed(context, '/book',
+                            arguments: item)
+                      },
+                    ),
                   ),
-                ),
-              ),
+                ],
+              )),
             ),
           ],
         ),
