@@ -16,7 +16,7 @@ class Book {
   String get getAuthor => _author;
   String get getRating => _rating;
   String get getDescription => _description;
-  String get getClusterId => _clusterId;
+  int get getClusterId => int.parse(_clusterId);
 }
 
 List<Book> books = [];

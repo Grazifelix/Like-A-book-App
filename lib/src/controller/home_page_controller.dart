@@ -14,28 +14,36 @@ void initUserCollection() async {
   var result = await collection.get();
 
   for (var doc in result.docs) {
-    Reading reading =
-        Reading(doc.id, doc['isFavorite'], doc['readAfter'], doc['readed']);
-    reading.setRating = doc['rating'];
-    readingBooks.add(reading);
+    if (doc.id != 'mode') {
+      Reading reading =
+          Reading(doc.id, doc['isFavorite'], doc['readAfter'], doc['readed']);
+      reading.setRating = doc['rating'];
+      readingBooks.add(reading);
+    }
   }
 }
 
-Future<void> getUserMode() async {
+Future<bool> getUserMode() async {
   var mode = await FirebaseFirestore.instance
       .collection(localUser.getUserId)
       .doc('mode')
       .get();
   localUser.setIsRandomMode = mode['random'];
+  return mode['random'];
 }
 
 //Flask API
 
-var url = Uri.parse("http://127.0.0.1:5000/get-random-books");
 var defautLivroUrl =
-    'https://camo.githubusercontent.com/b7b7dca15c743879821e7cfc14e8034ecee3588e221de0a6f436423e304d95f5/68747470733a2f2f7a7562652e696f2f66696c65732f706f722d756d612d626f612d63617573612f33363664616462316461323032353338616531333332396261333464393030362d696d6167652e706e67';
+    "https://media.istockphoto.com/photos/light-purple-defocused-blurred-motion-abstract-background-picture-id1138288769?k=20&m=1138288769&s=612x612&w=0&h=qJ233qtmMHje4XqJZxnSbTUfLo4-gLdqDGp4F51HQuo=";
 Future getBooks() async {
-  await getUserMode();
+  late Uri url;
+  if (await getUserMode()) {
+    url = Uri.parse("http://127.0.0.1:5000/get-random-books");
+  } else {
+    url = Uri.parse(
+        "http://127.0.0.1:5000/get-recomendBooks?user_id=${localUser.getUserId}");
+  }
   final response =
       await http.get(url, headers: {"Access-Control-Allow-Origin": "true"});
   final decode = jsonDecode(response.body);

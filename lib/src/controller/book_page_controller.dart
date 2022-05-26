@@ -7,12 +7,12 @@ CollectionReference collection =
     FirebaseFirestore.instance.collection(localUser.getUserId);
 
 bool isReadingBook(Book book) {
-  return readingBooks.any((element) => element.getBookId == book.getTitle);
+  return readingBooks.any((element) => element.getBookId == book.getBookId);
 }
 
 Reading searchBook(Book book) {
   return readingBooks
-      .firstWhere((element) => element.getBookId == book.getTitle);
+      .firstWhere((element) => element.getBookId == book.getBookId);
 }
 
 bool isSavedBook(Book book) {
@@ -46,7 +46,7 @@ void saveBook(Book book) {
     if (result.isAllFalse()) {
       cleanDatabase(result);
     } else {
-      collection.doc(book.getTitle).update(
+      collection.doc(book.getBookId).update(
         {
           'readAfter': result.getIsReadAfter,
         },
@@ -64,7 +64,7 @@ void favoriteBook(Book book) {
     if (result.isAllFalse()) {
       cleanDatabase(result);
     } else {
-      collection.doc(book.getTitle).update(
+      collection.doc(book.getBookId).update(
         {
           'isFavorite': result.getIsFavorite,
         },
@@ -82,7 +82,7 @@ void doneBook(Book book) {
     if (result.isAllFalse()) {
       cleanDatabase(result);
     } else {
-      collection.doc(book.getTitle).update(
+      collection.doc(book.getBookId).update(
         {
           'readed': result.getIsReaded,
         },
@@ -100,7 +100,7 @@ void createReadingBook(
   bool readAfter = false,
   bool readed = false,
 }) {
-  collection.doc(book.getTitle).set(
+  collection.doc(book.getBookId).set(
     {
       'rating': rating,
       'isFavorite': isFavorite,
@@ -108,7 +108,7 @@ void createReadingBook(
       'readed': readed,
     },
   );
-  Reading reading = Reading(book.getTitle, isFavorite, readAfter, readed);
+  Reading reading = Reading(book.getBookId, isFavorite, readAfter, readed);
   reading.setRating = rating;
   readingBooks.add(reading);
 }

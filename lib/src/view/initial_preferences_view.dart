@@ -148,14 +148,14 @@ class _InitialPreferences extends State<InitialPreferences> {
               ))),
       child: Theme(
         data: Theme.of(context).copyWith(
-          unselectedWidgetColor: Color.fromARGB(0, 255, 255, 255),
+          unselectedWidgetColor: const Color.fromARGB(0, 255, 255, 255),
         ),
         child: Stack(alignment: Alignment.center, children: [
           Text(book.getTitle),
           Transform.scale(
             scale: 5.0,
             child: Checkbox(
-              activeColor: Color.fromARGB(160, 99, 85, 207),
+              activeColor: const Color.fromARGB(160, 99, 85, 207),
               shape: const CircleBorder(side: BorderSide.none),
               value: clicked,
               onChanged: (value) => setState(
