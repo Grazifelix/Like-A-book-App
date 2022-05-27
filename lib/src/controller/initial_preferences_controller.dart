@@ -46,6 +46,5 @@ void saveBooks(List selectBooks, CollectionReference collection) {
       'readed': true,
       'cluster_id': book.getClusterId,
     });
-    readingBooks.add(Reading(book.getBookId, false, false, true));
   }
 }

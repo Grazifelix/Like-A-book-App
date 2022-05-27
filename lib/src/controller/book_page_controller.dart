@@ -111,6 +111,7 @@ void createReadingBook(
   Reading reading = Reading(book.getBookId, isFavorite, readAfter, readed);
   reading.setRating = rating;
   readingBooks.add(reading);
+  userBooks.add(book);
 }
 
 void ratingBook(Book book, int starValue) {
